@@ -1,18 +1,24 @@
 {
     "configurations": [
         {
-            "name": "Mac",
+            "name": "Win64",
             "includePath": [
-                "${workspaceFolder}/**",
                 "${workspaceFolder}/include",
-                "/opt/homebrew/include/SDL2",
-                "/opt/homebrew/include",
-                "/Users/isakjhafthorsson/Documents/GitHub/realengine"
+                "${workspaceFolder}/**",
+                "C:/msys64/ucrt64/include/SDL2",
+                "C:/msys64/ucrt64/include",
+                "C:/msys64/ucrt64/include/**"
             ],
-            "compilerPath": "/opt/homebrew/bin/g++-14",
-            "intelliSenseMode": "macos-gcc-arm64",
+            "defines": [
+                "_DEBUG",
+                "UNICODE",
+                "_UNICODE"
+            ],
+            "windowsSdkVersion": "10.0.17763.0",
+            "compilerPath": "C:/msys64/ucrt64/bin/g++.exe",
             "cStandard": "c11",
-            "cppStandard": "c++17"
+            "cppStandard": "c++17",
+            "intelliSenseMode": "windows-gcc-x64"
         }
     ],
     "version": 4
