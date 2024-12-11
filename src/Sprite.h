@@ -1,5 +1,5 @@
-#ifndef COMPONENT_H
-#define COMPONENT_H
+#ifndef SPRITE_H
+#define SPRITE_H
 
 #include <SDL2/SDL.h>
 
@@ -16,7 +16,7 @@ namespace reng
         virtual void keyUp(const SDL_Event& eve) {}
 
         virtual void draw() const = 0;
-        virtual void tick() {};
+        virtual void tick() {}
 
         const SDL_Rect& getRect() const { return rect; }
 
