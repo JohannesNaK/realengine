@@ -1,6 +1,7 @@
 #include <iostream>
 #include <SDL2/SDL.h>
 #include "GameEngine.h"
+#include "RectSprite.h"
  void pause(){
      std::cout << "Press Enter to exit...";
     
@@ -47,9 +48,11 @@ int main(int argc, char* argv[]){
         SDL_RenderPresent(renderer);
     }
  */
-    
     GameEngine eng;
-    
+    eng.init();
+    reng::RectSprite rect(20,20,20,20,{255,0,0,0});
+    eng.addSprite(&rect);
+    eng.run();
     pause();
     return 0;
 }
