@@ -2,9 +2,11 @@
 #define SPRITE_H
 
 #include <SDL2/SDL.h>
-
+    class GameEngine;
 namespace reng
 {
+    class PhysicsEngine;
+ 
     class Sprite
     {
     public:
@@ -14,18 +16,16 @@ namespace reng
         virtual void mouseUp(const SDL_Event& eve) {}
         virtual void keyDown(const SDL_Event& eve) {}
         virtual void keyUp(const SDL_Event& eve) {}
-
-        virtual void draw() const = 0;
+        virtual void draw(SDL_Renderer* renderer){};
         virtual void tick() {}
 
-        const SDL_Rect& getRect() const { return rect; }
+         SDL_Rect* getRect();
 
     protected:
         Sprite(int x, int y, int w, int h);
-
     private:
+        PhysicsEngine * physicsEngine = nullptr;
         SDL_Rect rect;
-        
         Sprite(const Sprite& other) = delete;
         const Sprite& operator=(const Sprite& other) = delete;
     };

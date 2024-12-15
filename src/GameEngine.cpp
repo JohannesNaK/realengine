@@ -1,10 +1,12 @@
 #include <iostream>
 #include "GameEngine.h"
+#include "Sprite.h"
 
 GameEngine::GameEngine() {
-      window = nullptr;
+    window = nullptr;
     renderer = nullptr;
     isRunning = false; 
+    physicsEngine = nullptr;
 } 
 
 GameEngine::~GameEngine() {
@@ -17,10 +19,12 @@ void GameEngine::init() {
     window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     isRunning = true;
-   
+    reng::PhysicsEngine physics(this);
+    physicsEngine = &physics;
 }
 
 void GameEngine::addSprite(reng::Sprite* sprite) {
+    physicsEngine->addSprite(sprite);
     sprites.push_back(sprite);
 }
 
@@ -29,6 +33,8 @@ void GameEngine::addSprite(reng::Sprite* sprite) {
 void GameEngine::run() {
     while (isRunning) {
         handleEvents();
+        //Handle physics events
+        handlePhysics();
         update();
         render();
         SDL_Delay(16); //~60 FPS
@@ -45,7 +51,9 @@ void GameEngine::handleEvents() {
         // HANDLE DIFFERENT EVENTS
     }
 }
+void GameEngine::handlePhysics(){
 
+}
 void GameEngine::update() {
     for (auto* sprite : sprites) {
         sprite->tick();
@@ -57,7 +65,7 @@ void GameEngine::render() {
     SDL_RenderClear(renderer);      //Clear screen
 
     for (auto* sprite : sprites) {
-        sprite->draw();
+        sprite->draw(renderer);
     }
 
     SDL_RenderPresent(renderer);       //Update screen
