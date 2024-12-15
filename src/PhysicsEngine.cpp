@@ -4,6 +4,9 @@
 #include "Sprite.h"
 namespace reng{
   
+PhysicsEngine::PhysicsEngine(GameEngine* eng){
+    this-> gameEngine = eng;
+}
 
 void PhysicsEngine::move(Sprite* sprite,  Vector velocity){
     SDL_Rect rect = *sprite->getRect();

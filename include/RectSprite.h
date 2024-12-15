@@ -8,7 +8,6 @@ namespace reng
     class RectSprite : public Sprite
     {
     public:
-        // Constructor
         RectSprite(int x, int y, int w, int h, SDL_Color color)
             : Sprite(x, y, w, h), rectColor(color) {}
 
@@ -16,7 +15,7 @@ namespace reng
         void draw(SDL_Renderer* renderer)  override;
 
     private:
-        SDL_Color rectColor; // Store the rectangle color
+        SDL_Color rectColor; 
     };
 }
 
