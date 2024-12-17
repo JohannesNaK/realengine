@@ -6,27 +6,31 @@
 #include "PhysicsEngine.h"
 #include "Sprite.h"
 
+namespace reng {
+    class Sprite;   //Declaration of
+}
 class GameEngine {
     public:
-    GameEngine();
-    ~GameEngine();
-    void init();
-    void addSprite(reng::Sprite* sprite);
- 
-    void run();
-    void clean();
+        GameEngine();
+        ~GameEngine();
+        static bool init();
+        static void addSprite(reng::Sprite* sprite);
+        static void removeSprite(reng::Sprite* sprite);
+        static void run();
+        static void clean();
 
 
     private:
-     reng::PhysicsEngine* physicsEngine;
-    std::vector<reng::Sprite*> sprites;
-    SDL_Window* window;
-    SDL_Renderer* renderer;
-    bool isRunning;
-    void handleEvents();
-    void handlePhysics();
-    void update();
-    void render();
+        static reng::PhysicsEngine* physicsEngine;
+        static std::vector<reng::Sprite*> sprites;
+        static SDL_Window* window;
+        static SDL_Renderer* renderer;
+        static bool isRunning;
+
+        static void handleEvents();
+        static void handlePhysics();
+        static void update();
+        static void render();
 };
 
 #endif

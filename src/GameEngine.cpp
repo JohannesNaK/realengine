@@ -1,35 +1,47 @@
 #include <iostream>
 #include "GameEngine.h"
 #include "Sprite.h"
+#include "PhysicsEngine.h"
+#include <algorithm>
 
-GameEngine::GameEngine() {
-    window = nullptr;
-    renderer = nullptr;
-    isRunning = false; 
-    physicsEngine = nullptr;
-} 
+SDL_Window* GameEngine::window = nullptr;
+SDL_Renderer* GameEngine::renderer = nullptr;
+bool GameEngine::isRunning = false;
+std::vector<reng::Sprite*> GameEngine::sprites;
+physicsEngine = nullptr;
+
+GameEngine::GameEngine() {} 
 
 GameEngine::~GameEngine() {
     clean();
 }
 
-void GameEngine::init() {
-    
+//Initialize game engine
+bool GameEngine::init() {
     SDL_Init(SDL_INIT_EVERYTHING);
     window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     isRunning = true;
-    reng::PhysicsEngine physics(this);
     physicsEngine = &physics;
+
+    return true;
 }
 
+//Add sprite to engine
 void GameEngine::addSprite(reng::Sprite* sprite) {
     physicsEngine->addSprite(sprite);
     sprites.push_back(sprite);
 }
 
+//Remove sprite from engine
+void GameEngine::removeSprite(reng::Sprite* sprite) {
+   auto it = std::remove(sprites.begin(), sprites.end(), sprite);
+    if (it != sprites.end()) {
+        sprites.erase(it, sprites.end()); // Remove the sprite
+    }
+}
  
- 
+//Run game loop 
 void GameEngine::run() {
     while (isRunning) {
         handleEvents();
@@ -41,6 +53,7 @@ void GameEngine::run() {
     }
 }
 
+//Handle input
 void GameEngine::handleEvents() {
     SDL_Event event;
     while (SDL_PollEvent(&event)) {         
@@ -51,15 +64,19 @@ void GameEngine::handleEvents() {
         // HANDLE DIFFERENT EVENTS
     }
 }
+
 void GameEngine::handlePhysics(){
 
 }
+
+//Update game state
 void GameEngine::update() {
     for (auto* sprite : sprites) {
         sprite->tick();
     }
 }
 
+//Render all sprites
 void GameEngine::render() {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //Black background
     SDL_RenderClear(renderer);      //Clear screen
@@ -71,13 +88,16 @@ void GameEngine::render() {
     SDL_RenderPresent(renderer);       //Update screen
 }
 
+//Clean up resources
 void GameEngine::clean() {
     if (renderer) {
         SDL_DestroyRenderer(renderer);
+        renderer = nullptr;
     }
 
     if (window) {
         SDL_DestroyWindow(window);
+        window = nullptr;
     }
 
     SDL_Quit();

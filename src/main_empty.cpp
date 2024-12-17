@@ -2,7 +2,8 @@
 #include <SDL2/SDL.h>
 #include "GameEngine.h"
 #include "RectSprite.h"
- void pause(){
+
+void pause(){
      std::cout << "Press Enter to exit...";
     
     std::cin.get();
