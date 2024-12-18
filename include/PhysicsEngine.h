@@ -3,6 +3,9 @@
 #include "Vector.h"
 #include <vector>
 #include <queue>
+#include "Event.h"
+#include "SpriteMove.h"
+#include <memory>
 class GameEngine;
 namespace  reng {
     class Sprite;
@@ -10,9 +13,13 @@ namespace  reng {
     public:
         PhysicsEngine(GameEngine* GameEngine);
         bool addSprite(Sprite* sprite);
-        void move(Sprite* sprite, Vector velocity);
+        void moveRequest(Sprite& sprite, Vector velocity);
+        void pollEvents();
+        void setMoveEvent( Event<SpriteMove>* ev);
+            
     private:
-    GameEngine* gameEngine;
+      GameEngine* gameEngine;
+       Event<SpriteMove>* ev;
     };
    
 };
