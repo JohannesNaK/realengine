@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "../../../Downloads/realengine/realengine"
+		},
+		{
+			"path": "../build"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {}
+}
