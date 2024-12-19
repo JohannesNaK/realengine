@@ -1,5 +1,12 @@
 #include "EventCause.h"
-namespace reng {
-    EventCause::~EventCause(){}
-}
- 
+#include <string>
+namespace reng
+{
+    EventCause::EventCause(const std::string& name) : name(name) {
+
+    }
+    
+    const std::string& EventCause::getName(){
+        return name;
+    }
+}  

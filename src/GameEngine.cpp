@@ -8,9 +8,11 @@ SDL_Window* GameEngine::window = nullptr;
 SDL_Renderer* GameEngine::renderer = nullptr;
 bool GameEngine::isRunning = false;
 std::vector<reng::Sprite*> GameEngine::sprites;
-physicsEngine = nullptr;
+reng::PhysicsEngine* GameEngine::physicsEngine = new reng::PhysicsEngine();
 
-GameEngine::GameEngine() {} 
+GameEngine::GameEngine() {
+   
+} 
 
 GameEngine::~GameEngine() {
     clean();
@@ -22,17 +24,18 @@ bool GameEngine::init() {
     window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     isRunning = true;
-    physicsEngine = &physics;
+ 
 
     return true;
 }
 
 //Add sprite to engine
 void GameEngine::addSprite(reng::Sprite* sprite) {
-    physicsEngine->addSprite(sprite);
     sprites.push_back(sprite);
 }
-
+reng::PhysicsEngine* GameEngine::getPhysicsEngine(){
+    return physicsEngine;
+}
 //Remove sprite from engine
 void GameEngine::removeSprite(reng::Sprite* sprite) {
    auto it = std::remove(sprites.begin(), sprites.end(), sprite);
@@ -66,7 +69,7 @@ void GameEngine::handleEvents() {
 }
 
 void GameEngine::handlePhysics(){
-
+    physicsEngine->proccessQueuedEvents();
 }
 
 //Update game state

@@ -2,46 +2,31 @@
 #include "GameEngine.h"
 #include "Vector.h"
 #include "Sprite.h"
-#include <iostream>
-#include "Event.h"
-#include "SpriteMove.h"
-#include <memory>
-#include "RectSprite.h"
+#include "SpriteMoveTrigger.h"
+#include "EventWrapper.h"
 namespace reng{
   
-PhysicsEngine::PhysicsEngine(GameEngine* eng){
-    gameEngine = eng;
-    
-     
-    
- 
+PhysicsEngine::PhysicsEngine(){
+   queuedEvents = {};
+   moveEvent = new Event<SpriteMoveTrigger>("Sprite move event");
+   moveEvent->addListener(&testMoveListener);
 }
-void PhysicsEngine::moveRequest(Sprite& sprite, Vector velocity) {
-    std::cout << "Calling moveRequest" << std::endl;
-    try {
- 
-        SpriteMove move(sprite, velocity);  // Potential memory allocation here
-        std::cout << "SpriteMove initialized" << std::endl;
-        std::cout << "why";
-        if (ev == nullptr) {
-            std::cout << "ev is nullptr" << std::endl;
-        } else {
-            ev->addCause(move);  // This may also cause memory allocation issues
-            std::cout << "Cause added to event" << std::endl;
-        }
-    } catch (const std::bad_alloc& e) {
-        std::cout << "Caught bad_alloc: " << e.what() << std::endl;
-         // Rethrow the exception to terminate the program
+void PhysicsEngine::proccessQueuedEvents(){
+    while(!queuedEvents.empty()){
+        queuedEvents.front()->notifyListeners();
+        queuedEvents.pop();
     }
 }
-void PhysicsEngine::pollEvents(){
-    
+void PhysicsEngine::move(Sprite& sprite,  Vector velocity){
+    SpriteMoveTrigger moveTrigger("Sprite moved", sprite, velocity);
+    moveEvent->addTrigger(moveTrigger);
+    queuedEvents.push(static_cast<EventWrapper*>(moveEvent));
 }
-void PhysicsEngine::setMoveEvent(Event<SpriteMove>* evs){
-    ev = evs;
-}
- bool PhysicsEngine::addSprite(Sprite* sprite){
-    
+
+bool PhysicsEngine::testMoveListener(SpriteMoveTrigger& trigger){
+    std::cout << "Calling test " + trigger.getName() << std::endl;
+    std::cout << "At " << trigger.getSprite().getRect().x << std::endl;
+    std::cout << "New pos is " << trigger.getNewVeloocity().getX() << std::endl;
     return true;
 }
 

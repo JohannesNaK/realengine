@@ -23,7 +23,7 @@ namespace reng
         virtual void tick() {}
 
         void setTexture(SDL_Texture* tx);
-        const SDL_Rect& Sprite::getRect() const{ return rect; }
+        const SDL_Rect& getRect() const{ return rect; }
 
     protected:
         Sprite(int x, int y, int w, int h);

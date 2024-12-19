@@ -4,49 +4,33 @@
 #include "Event.h"
 #include <iostream>
 
- 
 namespace reng {
+    template <typename T>
+    Event<T>::Event(const std::string& name) : name(name) {
+        listeners = {};
+        triggerQueue = {};
+    }
 
-    template <typename Cause>
-    Event<Cause>::Event(const std::string& name, std::vector<Cause> causes, std::vector<bool (*)(Cause&)> listenerFuncs)
-        : name(name), causes(causes), listenerFuncs(listenerFuncs){}
+    template <typename T>
+    void Event<T>::addTrigger(T trigger) {
+        triggerQueue.push(trigger);
+    }
 
-template <typename Cause>
-void Event<Cause>::addListener(bool (*execute)(Cause& cause)) {
-    if (execute != nullptr)
-        listenerFuncs.push_back(execute);
-}
+    template <typename T>
+    void Event<T>::addListener(bool (*listener)(T& test)) {
+        listeners.push_back(listener);
+    }
 
-template <typename Cause>
-void Event<Cause>::addCause(Cause cause) {
-    std::cout << "Adding cause of type: " << typeid(Cause).name() << std::endl;
-    std::cout << "Cause address: " << &cause << std::endl;
-    std::cout << "try with vec " << std::endl;
-    std::vector<Cause> causses;
-    causes.push_back(cause);
-}
-
-    template <typename Cause>
-    void Event<Cause>::notifyListeners() {
-        std::cout << "in listener" << std::endl;
-        if (!(causes.empty())){
-            std::cout << "not empty";
-            for (auto f : listenerFuncs){
-                
-                f(causes.at(0));
+    template <typename T>
+    void Event<T>::notifyListeners() {
+        if (!triggerQueue.empty()) {
+            T& trigger = triggerQueue.front();
+            triggerQueue.pop();
+            for (auto* listener : listeners) {
+                listener(trigger);
             }
-       
-        }   else {
-            std::cout << "causes is empty!";
         }
-     
     }
-
-    template <typename Cause>
-    const std::string& Event<Cause>::getName() const {
-        return name;
-    }
-
-}  
+}
 
 #endif

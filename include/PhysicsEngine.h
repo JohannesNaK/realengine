@@ -4,22 +4,21 @@
 #include <vector>
 #include <queue>
 #include "Event.h"
-#include "SpriteMove.h"
-#include <memory>
+#include "EventCause.h"
+#include "SpriteMoveTrigger.h"
+#include "EventWrapper.h"
 class GameEngine;
 namespace  reng {
     class Sprite;
     class PhysicsEngine{
     public:
-        PhysicsEngine(GameEngine* GameEngine);
-        bool addSprite(Sprite* sprite);
-        void moveRequest(Sprite& sprite, Vector velocity);
-        void pollEvents();
-        void setMoveEvent( Event<SpriteMove>* ev);
-            
+        PhysicsEngine();
+        void move(Sprite& sprite, Vector velocity);
+        void proccessQueuedEvents();
     private:
-      GameEngine* gameEngine;
-       Event<SpriteMove>* ev;
+    Event<SpriteMoveTrigger>* moveEvent;
+    std::queue<EventWrapper*> queuedEvents;
+    static bool testMoveListener(SpriteMoveTrigger& trigger);
     };
    
 };

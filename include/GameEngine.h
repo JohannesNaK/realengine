@@ -14,6 +14,7 @@ class GameEngine {
         GameEngine();
         ~GameEngine();
         static bool init();
+        static reng::PhysicsEngine* getPhysicsEngine();
         static void addSprite(reng::Sprite* sprite);
         static void removeSprite(reng::Sprite* sprite);
         static void run();
@@ -21,6 +22,7 @@ class GameEngine {
 
 
     private:
+        
         static reng::PhysicsEngine* physicsEngine;
         static std::vector<reng::Sprite*> sprites;
         static SDL_Window* window;
