@@ -15,6 +15,7 @@ class GameEngine {
         ~GameEngine();
         static bool init();
         static reng::PhysicsEngine* getPhysicsEngine();
+        static SDL_Renderer* getRenderer(){ return renderer; }
         static void addSprite(reng::Sprite* sprite);
         static void removeSprite(reng::Sprite* sprite);
         static void run();

@@ -28,11 +28,9 @@ namespace reng
     protected:
         Sprite(int x, int y, int w, int h);
         SDL_Rect rect;
-
-    private:
-        PhysicsEngine* physicsEngine = nullptr;
         SDL_Texture* texture;
 
+    private:
         Sprite(const Sprite& other) = delete;
         const Sprite& operator=(const Sprite& other) = delete;
     };
