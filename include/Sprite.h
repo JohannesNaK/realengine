@@ -20,6 +20,7 @@ namespace reng
         virtual void draw(SDL_Renderer* renderer);
         void move();
         virtual void tick() {}
+        void addToPosition(Vector otherPosition);
         void setPosition(Vector newPosition);
         void setVelocity(Vector newVelocity);
         Vector getPosition();

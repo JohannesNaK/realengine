@@ -7,6 +7,7 @@
 #include "EventTrigger.h"
 #include "SpriteMoveTrigger.h"
 #include "EventWrapper.h"
+#include <functional>
 class GameEngine;
 namespace  reng {
     class Sprite;
@@ -14,10 +15,12 @@ namespace  reng {
     public:
         PhysicsEngine();
         void move(Sprite& sprite, Vector velocity);
+ 
+        void addMoveListener(std::function<void(SpriteMoveTrigger&)> listener);
         void proccessQueuedEvents();
     private:
     Event<SpriteMoveTrigger>* moveEvent;
-    static void testMoveListener(SpriteMoveTrigger& trigger);
+ 
     };
    
 };

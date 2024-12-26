@@ -15,16 +15,15 @@ namespace reng{
         if(texture)
             SDL_RenderCopy(renderer, texture, NULL, &getRect());
     }
-    void Sprite::move(){
-        if (velocity.getX() != 0 || velocity.getY() != 0)
-            GameEngine::getInstance()->getPhysicsEngine()->move(*this, velocity);
+    void Sprite::addToPosition(Vector otherPosition){
+        position = position + otherPosition;
+        rect.x = position.getX();
+        rect.y = position.getY();
     }
     void Sprite::setPosition(Vector newPosition){
-        
         position = newPosition;
-        rect.x += position.getX();
-        rect.y += position.getY();
-     
+        rect.x = position.getX();
+        rect.y = position.getY();
     }
      void Sprite::setVelocity(Vector newVelocity){
         velocity = newVelocity;

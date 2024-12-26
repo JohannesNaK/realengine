@@ -12,6 +12,14 @@ namespace reng
      Vector Vector::operator-(const Vector& a) const{
          return Vector(x-a.x,y-a.y);
     }
+    void Vector::operator*(float a) {
+        x = x*a;
+        y = y*a;
+    }
+    void Vector::rotate(float theta){
+        x = std::cos(theta);
+        y = std::sin(theta);
+    }
     int Vector::size(){
         return std::sqrt(x*x+y*y);
     }

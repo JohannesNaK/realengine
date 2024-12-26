@@ -31,10 +31,15 @@ int main(int argc, char* argv[]){
   // reng::Projectile* p = reng::Projectile::getInstance(10, 10, 200, 200, 2, 2);
     reng::Player player("Test player",10,110,50,50);
     player.setTexture(gubbTx);
+         player.setPosition(reng::Vector(400,300));
+  engine->setCameraFollowSprite(&player);
+  reng::RectSprite rect(20,20,20,20,{255,0,0,0});
+  engine->addSprite(&rect);
     engine->addSprite(&player);
-   //p->setTexture(gubbTx);
+     //p->setTexture(gubbTx);
    // engine->addSprite(p);
     engine->run();
+    pause();
 
     SDL_DestroyTexture(gubbTx);
     return 0;

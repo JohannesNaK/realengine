@@ -14,11 +14,12 @@ GameEngine* GameEngine::getInstance(){
         instance = new  GameEngine();
     return instance;
 }
-GameEngine::GameEngine()  {
+GameEngine::GameEngine() : camera(nullptr) {
 window = nullptr;
 renderer = nullptr;
 isRunning = false;
 queuedEvents = {};
+camera = nullptr;
 GameEngine::sprites = {};
 keyboardEvent = new Event<KeyboardTrigger>("Keyboard event");
 physicsEngine = new reng::PhysicsEngine();
@@ -34,14 +35,18 @@ bool GameEngine::init() {
     SDL_Init(SDL_INIT_EVERYTHING);
     window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+    camera = new Camera(renderer,nullptr);
     isRunning = true;
     return true;
+}
+void GameEngine::setCameraFollowSprite(Sprite* sprite){
+    camera->setSprite(sprite);
 }
 void GameEngine::addKeyListener(std::function<void(KeyboardTrigger&)> listener){
     keyboardEvent->addListener(listener);
 }
 void GameEngine::addEventToQueue(EventWrapper* wrapper){
-    std::cout << "added to queue " << std::endl;
+   
         queuedEvents.push(wrapper);
 }
 //Add sprite to engine
@@ -79,7 +84,8 @@ void GameEngine::handleEvents() {
     while (SDL_PollEvent(&event)) {        
       //Manage inputs, ask group if input should be on a seperate thread? 
         switch (event.type){
-            case SDL_QUIT: isRunning = false; break;
+            case SDL_QUIT: isRunning = false;
+             break;
 
             case SDL_KEYUP:
           
@@ -110,12 +116,19 @@ void GameEngine::handlePhysics(){
 
 //Update game state
 void GameEngine::update() {
+     
+  
     for (auto* sprite : sprites) {
+        if (camera != nullptr && camera->update() && sprite != camera->getSprite()){
+           Vector pos = sprite->getPosition()-camera->getOrgin();
+            sprite->setPosition(pos);
+        }
         sprite->tick();
     }
+    camera->setUpdate(false);
 }
 
-//Render all sprites
+ 
 void GameEngine::render() {
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //Black background
     SDL_RenderClear(renderer);      //Clear screen
@@ -124,7 +137,7 @@ void GameEngine::render() {
         sprite->draw(renderer);
     }
 
-    SDL_RenderPresent(renderer);       //Update screen
+    SDL_RenderPresent(renderer);   
 }
 
 //Clean up resources
@@ -138,7 +151,9 @@ void GameEngine::clean() {
         SDL_DestroyWindow(window);
         window = nullptr;
     }
-
+    delete camera;
+    delete keyboardEvent;
+    delete physicsEngine;
     SDL_Quit();
 }
 }

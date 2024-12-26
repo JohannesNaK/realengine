@@ -7,6 +7,7 @@
 #include "Sprite.h"
 #include "KeyboardTrigger.h"
 #include "Event.h"
+#include "Camera.h"
 #include <queue>
 #include <functional>
 #include <unordered_map>
@@ -18,18 +19,20 @@ namespace reng {
         void operator=(const GameEngine&) = delete;
         bool init();
          SDL_Renderer* getRenderer(){ return renderer; }
+         SDL_Window* getWindow();
          void addKeyListener(std::function<void(KeyboardTrigger&)> keyTrigger);
          void addSprite(Sprite* sprite);
          void removeSprite(Sprite* sprite);
          void run();
          void clean();
          void addEventToQueue(EventWrapper* wraper);
-
+         void setCameraFollowSprite(Sprite* sprite);
        PhysicsEngine* getPhysicsEngine();
     private:
         GameEngine();
         ~GameEngine();
         static GameEngine* instance;
+        Camera* camera;
         std::unordered_map<char,KeyboardTrigger> keyTriggers;
        PhysicsEngine* physicsEngine;
        Event<KeyboardTrigger>* keyboardEvent;

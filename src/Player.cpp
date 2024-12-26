@@ -14,7 +14,8 @@ namespace reng {
     }
     void Player::tick()
     {
-        move();
+          if (velocity.getX() != 0 || velocity.getY() != 0)
+            GameEngine::getInstance()->getPhysicsEngine()->move(*this,velocity);
     }
     void Player::onW(KeyboardTrigger &keyTrigger)
     {

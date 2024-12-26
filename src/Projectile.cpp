@@ -1,6 +1,6 @@
 #include "Projectile.h"
 #include "Sprite.h"
-
+#include "GameEngine.h"
 namespace reng{
     
     Projectile::Projectile(int x, int y, int w, int h, int xSpeed, int ySpeed): Sprite(x, y, w, h){
@@ -11,6 +11,6 @@ namespace reng{
     }
 
     void Projectile::tick(){
-        move();
+       // GameEngine::getInstance()->getPhysicsEngine()->move(this,velocity);
     }
 }
