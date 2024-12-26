@@ -4,7 +4,7 @@
 #include <vector>
 #include <queue>
 #include "Event.h"
-#include "EventCause.h"
+#include "EventTrigger.h"
 #include "SpriteMoveTrigger.h"
 #include "EventWrapper.h"
 class GameEngine;
@@ -17,8 +17,7 @@ namespace  reng {
         void proccessQueuedEvents();
     private:
     Event<SpriteMoveTrigger>* moveEvent;
-    std::queue<EventWrapper*> queuedEvents;
-    static bool testMoveListener(SpriteMoveTrigger& trigger);
+    static void testMoveListener(SpriteMoveTrigger& trigger);
     };
    
 };

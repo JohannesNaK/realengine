@@ -7,12 +7,13 @@ namespace reng
      Vector(int x, int y);
      Vector operator+(const Vector& a) const;
      Vector operator-(const Vector& y) const;
+     void setX(int newX);
+     void setY(int newY);
      int getX();
      int getY();
      int getNormal();
-     float direction();
+     Vector direction();
      int size();
-     const int length = 2;
      private:
      int x;
      int y;

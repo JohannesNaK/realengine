@@ -17,7 +17,7 @@ namespace reng {
     }
 
     template <typename T>
-    void Event<T>::addListener(bool (*listener)(T& test)) {
+    void Event<T>::addListener(std::function<void(T&)> listener) {
         listeners.push_back(listener);
     }
 
@@ -25,11 +25,12 @@ namespace reng {
     void Event<T>::notifyListeners() {
         if (!triggerQueue.empty()) {
             T& trigger = triggerQueue.front();
-            triggerQueue.pop();
-            for (auto* listener : listeners) {
+        
+            for (std::function<void(T&)> listener : listeners) {
                 listener(trigger);
             }
-        }
+         triggerQueue.pop();
+       }
     }
 }
 

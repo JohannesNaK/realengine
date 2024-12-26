@@ -2,16 +2,27 @@
 #include "GameEngine.h"
 #include "Sprite.h"
 #include "PhysicsEngine.h"
+#include "EventWrapper.h"
+#include "KeyboardTrigger.h"
+#include <unordered_map>
 #include <algorithm>
-
-SDL_Window* GameEngine::window = nullptr;
-SDL_Renderer* GameEngine::renderer = nullptr;
-bool GameEngine::isRunning = false;
-std::vector<reng::Sprite*> GameEngine::sprites;
-reng::PhysicsEngine* GameEngine::physicsEngine = new reng::PhysicsEngine();
-
-GameEngine::GameEngine() {
-   
+#include <functional>
+namespace reng {
+GameEngine* GameEngine::instance = nullptr;
+GameEngine* GameEngine::getInstance(){
+    if (instance == nullptr)
+        instance = new  GameEngine();
+    return instance;
+}
+GameEngine::GameEngine()  {
+window = nullptr;
+renderer = nullptr;
+isRunning = false;
+queuedEvents = {};
+GameEngine::sprites = {};
+keyboardEvent = new Event<KeyboardTrigger>("Keyboard event");
+physicsEngine = new reng::PhysicsEngine();
+ 
 } 
 
 GameEngine::~GameEngine() {
@@ -24,11 +35,15 @@ bool GameEngine::init() {
     window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     isRunning = true;
- 
-
     return true;
 }
-
+void GameEngine::addKeyListener(std::function<void(KeyboardTrigger&)> listener){
+    keyboardEvent->addListener(listener);
+}
+void GameEngine::addEventToQueue(EventWrapper* wrapper){
+    std::cout << "added to queue " << std::endl;
+        queuedEvents.push(wrapper);
+}
 //Add sprite to engine
 void GameEngine::addSprite(reng::Sprite* sprite) {
     sprites.push_back(sprite);
@@ -48,28 +63,47 @@ void GameEngine::removeSprite(reng::Sprite* sprite) {
 void GameEngine::run() {
     while (isRunning) {
         handleEvents();
-        //Handle physics events
         handlePhysics();
         update();
         render();
         SDL_Delay(16); //~60 FPS
     }
 }
-
+const char keyName(SDL_KeyboardEvent* key){
+    return *SDL_GetKeyName(key->keysym.sym);
+}
+ 
 //Handle input
 void GameEngine::handleEvents() {
     SDL_Event event;
-    while (SDL_PollEvent(&event)) {         
-        if (event.type == SDL_QUIT) {
-            isRunning = false;
+    while (SDL_PollEvent(&event)) {        
+      //Manage inputs, ask group if input should be on a seperate thread? 
+        switch (event.type){
+            case SDL_KEYUP:
+          
+                keyboardEvent->addTrigger(KeyboardTrigger("Key pressed",KeyboardTrigger::KeyState::RELEASED, keyName(&event.key)));
+                addEventToQueue(static_cast<EventWrapper*>(keyboardEvent));
+                break;
+             case SDL_KEYDOWN:
+           
+                keyboardEvent->addTrigger(KeyboardTrigger("Key released",KeyboardTrigger::KeyState::PRESSED, keyName(&event.key)));
+                addEventToQueue(static_cast<EventWrapper*>(keyboardEvent));
+                break;
         }
-
-        // HANDLE DIFFERENT EVENTS
+      while (!queuedEvents.empty()){
+            queuedEvents.front()->notifyListeners();
+            queuedEvents.pop();
+            
+            }
+        
     }
+       
 }
 
 void GameEngine::handlePhysics(){
-    physicsEngine->proccessQueuedEvents();
+           
+
+      
 }
 
 //Update game state
@@ -104,4 +138,5 @@ void GameEngine::clean() {
     }
 
     SDL_Quit();
+}
 }

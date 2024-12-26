@@ -15,11 +15,17 @@ namespace reng
     int Vector::size(){
         return std::sqrt(x*x+y*y);
     }
-    float Vector::direction(){
-        return 0;
+    Vector Vector::direction(){
+       return Vector(x/size(),y/size());
     }
      int Vector::getNormal(){
         return 0;
+    }
+    void Vector::setX(int newX){
+        x = newX;
+    }
+    void Vector::setY(int newY){
+        y = newY;
     }
     int Vector::getX(){
         return x;
