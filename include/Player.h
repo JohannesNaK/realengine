@@ -9,7 +9,6 @@ namespace reng {
     class Player : public Sprite {
         public:
         Player(const std::string& name, int x, int y, int w, int h);
-        void move();
         void tick() override;
         private:
         void onW(KeyboardTrigger& keyTrigger);

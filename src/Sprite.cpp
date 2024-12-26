@@ -2,6 +2,8 @@
 #include <SDL2/SDL.h>
 #include "Vector.h"
 #include <iostream>
+#include "GameEngine.h"
+
 namespace reng{
     Sprite::Sprite(int x, int y, int w, int h):  position(Vector(x,y)), velocity(Vector(0,0)),rect{x, y, w, h}, texture(nullptr) {
       std::cout << "position is " << position.getX() << std::endl;
@@ -12,6 +14,10 @@ namespace reng{
     void Sprite::draw(SDL_Renderer* renderer){
         if(texture)
             SDL_RenderCopy(renderer, texture, NULL, &getRect());
+    }
+    void Sprite::move(){
+        if (velocity.getX() != 0 || velocity.getY() != 0)
+            GameEngine::getInstance()->getPhysicsEngine()->move(*this, velocity);
     }
     void Sprite::setPosition(Vector newPosition){
         

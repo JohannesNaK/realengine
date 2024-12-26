@@ -35,7 +35,6 @@ int main(int argc, char* argv[]){
    //p->setTexture(gubbTx);
    // engine->addSprite(p);
     engine->run();
-    pause();
 
     SDL_DestroyTexture(gubbTx);
     return 0;

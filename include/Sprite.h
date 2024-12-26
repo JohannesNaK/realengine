@@ -17,16 +17,16 @@ namespace reng
 
         virtual void mouseDown(const SDL_Event& eve) {}
         virtual void mouseUp(const SDL_Event& eve) {}
-        virtual void keyDown(const SDL_Event& eve) {}
-        virtual void keyUp(const SDL_Event& eve) {}
         virtual void draw(SDL_Renderer* renderer);
+        void move();
         virtual void tick() {}
         void setPosition(Vector newPosition);
         void setVelocity(Vector newVelocity);
         Vector getPosition();
         Vector getVelocity();
+        bool isRemoved(){ return removed; }
         void setTexture(SDL_Texture* tx);
-         SDL_Rect& getRect() { return rect; }
+        SDL_Rect& getRect() { return rect; }
 
     protected:
         Sprite(int x, int y, int w, int h);
@@ -34,6 +34,7 @@ namespace reng
         Vector velocity;
         SDL_Rect rect;
         SDL_Texture* texture;
+        bool removed = false;
 
     private:
         Sprite(const Sprite& other) = delete;

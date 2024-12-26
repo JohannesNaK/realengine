@@ -10,13 +10,9 @@ namespace reng{
         public:
             static Projectile* getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed);
             virtual void tick();
-
-            Vector& getVelocity() { return velocity; }
-
-        protected:
-            Vector velocity;
-            Projectile(int x, int y, int w, int h, int xSpeed, int ySpeed);
             
+        protected:
+            Projectile(int x, int y, int w, int h, int xSpeed, int ySpeed);          
     };
 }
 

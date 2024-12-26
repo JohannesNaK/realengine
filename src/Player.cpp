@@ -12,13 +12,9 @@ namespace reng {
             onD(keyTrigger);
     });
     }
-    void Player::move(){
-       GameEngine::getInstance()->getPhysicsEngine()->move(*this,velocity);
-    }
     void Player::tick()
     {
-         if (velocity.getX() != 0 || velocity.getY() != 0)
-           move();
+        move();
     }
     void Player::onW(KeyboardTrigger &keyTrigger)
     {
@@ -34,7 +30,7 @@ namespace reng {
     void Player::onA(KeyboardTrigger& keyTrigger){
         if (keyTrigger.getKey() == 'A') {
              if (keyTrigger.getKeyState() == KeyboardTrigger::KeyState::PRESSED) {
-                 velocity.setX(-1);
+                velocity.setX(-1);
             }else {
                 velocity.setX(0);
             }

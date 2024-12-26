@@ -79,6 +79,8 @@ void GameEngine::handleEvents() {
     while (SDL_PollEvent(&event)) {        
       //Manage inputs, ask group if input should be on a seperate thread? 
         switch (event.type){
+            case SDL_QUIT: isRunning = false; break;
+
             case SDL_KEYUP:
           
                 keyboardEvent->addTrigger(KeyboardTrigger("Key pressed",KeyboardTrigger::KeyState::RELEASED, keyName(&event.key)));
