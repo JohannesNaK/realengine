@@ -21,7 +21,7 @@ namespace reng {
     {
         if (keyTrigger.getKey() == 'W') {
             if (keyTrigger.getKeyState() == KeyboardTrigger::KeyState::PRESSED) {
-                 velocity.setY(-1);
+                 velocity.setY(-5);
             }else {
                 velocity.setY(0);
             }
@@ -31,7 +31,7 @@ namespace reng {
     void Player::onA(KeyboardTrigger& keyTrigger){
         if (keyTrigger.getKey() == 'A') {
              if (keyTrigger.getKeyState() == KeyboardTrigger::KeyState::PRESSED) {
-                velocity.setX(-1);
+                velocity.setX(-5);
             }else {
                 velocity.setX(0);
             }
@@ -41,7 +41,7 @@ namespace reng {
     void Player::onS(KeyboardTrigger& keyTrigger){
         if (keyTrigger.getKey() == 'S'){
              if (keyTrigger.getKeyState() == KeyboardTrigger::KeyState::PRESSED) {
-                 velocity.setY(1);
+                 velocity.setY(5);
             }else {
                 velocity.setY(0);
             }
@@ -50,7 +50,7 @@ namespace reng {
     void Player::onD(KeyboardTrigger& keyTrigger){
         if (keyTrigger.getKey() == 'D'){
              if (keyTrigger.getKeyState() == KeyboardTrigger::KeyState::PRESSED) {
-                 velocity.setX(1);
+                 velocity.setX(5);
             }else {
                 velocity.setX(0);
             }

@@ -11,4 +11,7 @@ namespace reng  {
     const KeyboardTrigger::KeyState KeyboardTrigger::getKeyState(){
         return state;
     }
+    void KeyboardTrigger::onPop(){
+        
+    }
 }

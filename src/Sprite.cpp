@@ -17,6 +17,7 @@ namespace reng{
     }
     void Sprite::addToPosition(Vector otherPosition){
         position = position + otherPosition;
+        std::cout << "New position is " << position.getX() << ":" << position.getY() << std::endl;
         rect.x = position.getX();
         rect.y = position.getY();
     }

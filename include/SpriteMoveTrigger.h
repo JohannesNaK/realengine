@@ -9,13 +9,16 @@ namespace reng
   class SpriteMoveTrigger: public EventTrigger {
         
         public:
-        SpriteMoveTrigger(const std::string& name, Sprite& sprite,Vector oldVelocity, Vector newVelocity);
+        SpriteMoveTrigger(const std::string& name, Sprite& sprite,Vector oldPosition, Vector newVelocity);
         Sprite& getSprite();
-        Vector getOldVelocity();
+        Vector getNewPosition();
+        Vector getOldPosition();
         Vector getNewVeloocity();
+         void setVelocity(Vector velocity);
+        void onPop() override;
         private:
         Sprite& sprite;
-        Vector oldVelocity;
+        Vector oldPosition;
         Vector newVelocity;
   };    
 };

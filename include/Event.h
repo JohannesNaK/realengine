@@ -10,14 +10,15 @@ namespace reng {
     class Event : public EventWrapper{
     public:
         Event(const std::string& name);
-        void addTrigger(T trigger);
+        virtual ~Event() {}
+        void addTrigger(T* trigger);
         void addListener(std::function<void(T&)> test);
         void notifyListeners() override;
 
     private:
         std::string name; 
         std::vector<std::function<void(T&)>>listeners;
-        std::queue<T> triggerQueue;
+        std::queue<T*> triggerQueue;
     };
 }
 

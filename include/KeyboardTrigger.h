@@ -8,6 +8,7 @@ namespace reng {
         enum class KeyState { PRESSED, RELEASED };
         KeyboardTrigger(const std::string& name, KeyState state, const char key);
         const char getKey();
+        void onPop() override;
        const KeyState getKeyState();
         private:
         KeyState state;

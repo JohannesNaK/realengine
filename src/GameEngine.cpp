@@ -4,7 +4,7 @@
 #include "PhysicsEngine.h"
 #include "EventWrapper.h"
 #include "KeyboardTrigger.h"
-#include <unordered_map>
+ 
 #include <algorithm>
 #include <functional>
 namespace reng {
@@ -81,31 +81,35 @@ const char keyName(SDL_KeyboardEvent* key){
 //Handle input
 void GameEngine::handleEvents() {
     SDL_Event event;
-    while (SDL_PollEvent(&event)) {        
+    //Switched from while to an if statement, issues when holding down keys causes the event system to execute ALL SDL events first, which results in missmatched input.
+    if (SDL_PollEvent(&event)) {        
       //Manage inputs, ask group if input should be on a seperate thread? 
         switch (event.type){
             case SDL_QUIT: isRunning = false;
-             break;
-
-            case SDL_KEYUP:
-          
-                keyboardEvent->addTrigger(KeyboardTrigger("Key pressed",KeyboardTrigger::KeyState::RELEASED, keyName(&event.key)));
+            break;
+            case SDL_KEYUP: {
+                 KeyboardTrigger* keyTrigger = new KeyboardTrigger("Key released",KeyboardTrigger::KeyState::RELEASED, keyName(&event.key));
+                keyboardEvent->addTrigger(keyTrigger);
                 addEventToQueue(static_cast<EventWrapper*>(keyboardEvent));
                 break;
-             case SDL_KEYDOWN:
-           
-                keyboardEvent->addTrigger(KeyboardTrigger("Key released",KeyboardTrigger::KeyState::PRESSED, keyName(&event.key)));
+            }
+                
+             case SDL_KEYDOWN: {
+                 KeyboardTrigger* keyTrigger = new KeyboardTrigger("Key pressed",KeyboardTrigger::KeyState::PRESSED, keyName(&event.key));
+                keyboardEvent->addTrigger(keyTrigger);
                 addEventToQueue(static_cast<EventWrapper*>(keyboardEvent));
                 break;
+             }
+        
         }
-      while (!queuedEvents.empty()){
+   
+    
+    }
+          while (!queuedEvents.empty()){
             queuedEvents.front()->notifyListeners();
             queuedEvents.pop();
             
             }
-        
-    }
-       
 }
 
 void GameEngine::handlePhysics(){
@@ -117,9 +121,11 @@ void GameEngine::handlePhysics(){
 //Update game state
 void GameEngine::update() {
      
-  
+  //TODO: let the camera handle all render.
+  //TODO: dont render sprites that are not within camera distance.
     for (auto* sprite : sprites) {
         if (camera != nullptr && camera->update() && sprite != camera->getSprite()){
+            //Offsetting every sprite to make the camera centralized.
            Vector pos = sprite->getPosition()-camera->getOrgin();
             sprite->setPosition(pos);
         }
@@ -130,8 +136,11 @@ void GameEngine::update() {
 
  
 void GameEngine::render() {
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255); //Black background
-    SDL_RenderClear(renderer);      //Clear screen
+       
+  //TODO: let the camera handle all render.
+  //TODO: dont render sprites that are not within camera distance.
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);  
+    SDL_RenderClear(renderer);       
 
     for (auto* sprite : sprites) {
         sprite->draw(renderer);

@@ -12,7 +12,7 @@ namespace reng {
     }
 
     template <typename T>
-    void Event<T>::addTrigger(T trigger) {
+    void Event<T>::addTrigger(T* trigger) {
         triggerQueue.push(trigger);
     }
 
@@ -24,12 +24,14 @@ namespace reng {
     template <typename T>
     void Event<T>::notifyListeners() {
         if (!triggerQueue.empty()) {
-            T& trigger = triggerQueue.front();
-        
+            T* trigger = triggerQueue.front();
+            
             for (std::function<void(T&)> listener : listeners) {
-                listener(trigger);
+                listener(*trigger);
             }
+         trigger->onPop();
          triggerQueue.pop();
+         delete trigger;
        }
     }
 }

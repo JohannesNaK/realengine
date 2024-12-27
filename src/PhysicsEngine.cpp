@@ -18,8 +18,7 @@ void PhysicsEngine::addMoveListener(std::function<void(SpriteMoveTrigger&)> list
 void PhysicsEngine::move(Sprite& sprite,  Vector velocity){
 
     Vector oldPosition =  sprite.getPosition();
-    sprite.addToPosition(velocity);
-    SpriteMoveTrigger moveTrigger("Sprite moved",sprite, oldPosition, velocity);
+    SpriteMoveTrigger* moveTrigger = new SpriteMoveTrigger("Sprite moved",sprite, oldPosition, velocity);
     moveEvent->addTrigger(moveTrigger);
     GameEngine::getInstance()->addEventToQueue(moveEvent);
 }
