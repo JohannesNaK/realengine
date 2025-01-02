@@ -1,14 +1,15 @@
 #ifndef PLAYER_H
 #define PLAYER_H
-#include "Sprite.h"
+#include "Entity.h"
 #include "Event.h"
 #include "KeyboardTrigger.h"
 #include "Vector.h"
 #include <string>
+
 namespace reng {
-    class Player : public Sprite {
+    class Player : public Entity {
         public:
-        Player(const std::string& name, int x, int y, int w, int h);
+        Player(const std::string& name, int x, int y, int w, int h, int hp = 1);
         void tick() override;
         private:
         void onW(KeyboardTrigger& keyTrigger);
@@ -16,7 +17,7 @@ namespace reng {
         void onS(KeyboardTrigger& keyTrigger);
         void onD(KeyboardTrigger& keyTrigger);
         static Event<KeyboardTrigger> keys;
-        const std::string& name;
+        
     };
 };
 #endif

@@ -26,6 +26,7 @@ namespace reng
         Vector getPosition();
         Vector getVelocity();
         bool isRemoved(){ return removed; }
+        void setToRemove(){ removed = true; }
         void setTexture(SDL_Texture* tx);
         SDL_Rect& getRect() { return rect; }
 

@@ -3,7 +3,7 @@
 #include "GameEngine.h"
 #include "KeyboardTrigger.h"
 namespace reng {
-    Player::Player(const std::string& name, int x, int y, int w, int h) : Sprite(x,y,w,h), name(name) {
+    Player::Player(const std::string& name, int x, int y, int w, int h, int hp = 1) : Entity(name, x,y,w,h, hp){
         GameEngine& engine = *GameEngine::getInstance();
            engine.addKeyListener([this](KeyboardTrigger& keyTrigger) {
             onW(keyTrigger);
@@ -16,6 +16,9 @@ namespace reng {
     {
           if (velocity.getX() != 0 || velocity.getY() != 0)
             GameEngine::getInstance()->getPhysicsEngine()->move(*this,velocity);
+
+        if(hp <= 0)
+            setToRemove();
     }
     void Player::onW(KeyboardTrigger &keyTrigger)
     {
