@@ -29,7 +29,7 @@ int main(int argc, char* argv[]){
     //eng.getPhysicsEngine()->move(rect, reng::Vector(10,3));
 
   // reng::Projectile* p = reng::Projectile::getInstance(10, 10, 200, 200, 2, 2);
-    reng::Player player("Test player",10,110,50,50);
+    reng::Player player("Test player",10,110,50,50,1);
     player.setTexture(gubbTx);
          player.setPosition(reng::Vector(400,300));
   engine->setCameraFollowSprite(&player);

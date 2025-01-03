@@ -6,21 +6,27 @@
 #include "Event.h"
 #include "EventTrigger.h"
 #include "SpriteMoveTrigger.h"
+#include "CollisionTrigger.h"
 #include "EventWrapper.h"
+ 
 #include <functional>
-class GameEngine;
+ 
 namespace  reng {
     class Sprite;
+    class GameEngine;
     class PhysicsEngine{
     public:
-        PhysicsEngine();
+        PhysicsEngine(GameEngine* gameEngine);
         void move(Sprite& sprite, Vector velocity);
- 
         void addMoveListener(std::function<void(SpriteMoveTrigger&)> listener);
+        void addCollisionListener(std::function<void(CollisionTrigger&)> listener);
         void proccessQueuedEvents();
     private:
+    bool checkCollision(Vector sPos, Vector sBottom, Vector sourcePos, Vector sourceBottom);
+    GameEngine* gameEngine;
     Event<SpriteMoveTrigger>* moveEvent;
- 
+    Event<CollisionTrigger>* collisionEvent;
+     void collisionListener(Sprite& source);
     };
    
 };

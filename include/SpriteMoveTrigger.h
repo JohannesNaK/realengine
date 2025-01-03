@@ -14,7 +14,7 @@ namespace reng
         Vector getNewPosition();
         Vector getOldPosition();
         Vector getNewVeloocity();
-         void setVelocity(Vector velocity);
+        void setVelocity(Vector velocity);
         void onPop() override;
         private:
         Sprite& sprite;

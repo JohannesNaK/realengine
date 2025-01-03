@@ -6,11 +6,14 @@ namespace reng
     Vector::Vector(int x, int y) : x(x), y(y){
       
     }
-    Vector Vector::operator+(const Vector& a) const{
-         return Vector(x+a.x,y+a.y);
+    bool Vector::operator==(const Vector& otherVec) const{
+        return x == otherVec.x && y == otherVec.y;
     }
-     Vector Vector::operator-(const Vector& a) const{
-         return Vector(x-a.x,y-a.y);
+    Vector Vector::operator+(const Vector& otherVec) const{
+         return Vector(x+otherVec.x,y+otherVec.y);
+    }
+     Vector Vector::operator-(const Vector& otherVec) const{
+         return Vector(x-otherVec.x,y-otherVec.y);
     }
     Vector Vector::operator*(float a) {
        return Vector(x*a,y*a);
@@ -19,10 +22,10 @@ namespace reng
         x = std::cos(theta);
         y = std::sin(theta);
     }
-    int Vector::size(){
+    int Vector::size() const{
         return std::sqrt(x*x+y*y);
     }
-    Vector Vector::direction(){
+    Vector Vector::direction() const{
        return Vector(x/size(),y/size());
     }
      int Vector::getNormal(){
@@ -34,10 +37,10 @@ namespace reng
     void Vector::setY(int newY){
         y = newY;
     }
-    int Vector::getX(){
+    int Vector::getX() const{
         return x;
     }
-    int Vector::getY(){
+    int Vector::getY() const{
         return y;
     }
    

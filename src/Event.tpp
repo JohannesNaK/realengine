@@ -28,6 +28,7 @@ namespace reng {
             
             for (std::function<void(T&)> listener : listeners) {
                 listener(*trigger);
+      
             }
          trigger->onPop();
          triggerQueue.pop();

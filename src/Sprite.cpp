@@ -5,9 +5,9 @@
 #include "GameEngine.h"
 
 namespace reng{
-    Sprite::Sprite(int x, int y, int w, int h):  position(Vector(x,y)), velocity(Vector(0,0)),rect{x, y, w, h}, texture(nullptr) {
-      std::cout << "position is " << position.getX() << std::endl;
-      std::cout << "velocity is " << velocity.getX() << std::endl;
+    Sprite::Sprite(int x, int y, int w, int h, std::string id):  position(Vector(x,y)), velocity(Vector(0,0)), id(id),rect{x, y, w, h}
+    ,texture(nullptr) {
+         
     }
     Sprite::~Sprite(){}
 
@@ -17,7 +17,6 @@ namespace reng{
     }
     void Sprite::addToPosition(Vector otherPosition){
         position = position + otherPosition;
-        std::cout << "New position is " << position.getX() << ":" << position.getY() << std::endl;
         rect.x = position.getX();
         rect.y = position.getY();
     }
@@ -29,12 +28,13 @@ namespace reng{
      void Sprite::setVelocity(Vector newVelocity){
         velocity = newVelocity;
     }
-    Vector Sprite::getPosition(){
+    Vector Sprite::getPosition() const{
         return position;
     }
-    Vector Sprite::getVelocity(){
+    Vector Sprite::getVelocity() const{
         return velocity;
     }
+    
     void Sprite::setTexture(SDL_Texture* tx){
         texture = tx;
     }

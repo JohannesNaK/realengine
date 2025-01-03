@@ -9,8 +9,9 @@
 namespace reng {
     class Player : public Entity {
         public:
-        Player(const std::string& name, int x, int y, int w, int h, int hp = 1);
-        void tick() override;
+        Player(const std::string  name, int x, int y, int w, int h, int hp);
+    
+        virtual void tick() override;
         private:
         void onW(KeyboardTrigger& keyTrigger);
         void onA(KeyboardTrigger& keyTrigger);

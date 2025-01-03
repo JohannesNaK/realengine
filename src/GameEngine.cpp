@@ -1,7 +1,7 @@
 #include <iostream>
 #include "GameEngine.h"
 #include "Sprite.h"
-#include "PhysicsEngine.h"
+ 
 #include "EventWrapper.h"
 #include "KeyboardTrigger.h"
  
@@ -22,7 +22,7 @@ queuedEvents = {};
 camera = nullptr;
 GameEngine::sprites = {};
 keyboardEvent = new Event<KeyboardTrigger>("Keyboard event");
-physicsEngine = new reng::PhysicsEngine();
+physicsEngine = new PhysicsEngine(this);
  
 } 
 
@@ -46,12 +46,14 @@ void GameEngine::addKeyListener(std::function<void(KeyboardTrigger&)> listener){
     keyboardEvent->addListener(listener);
 }
 void GameEngine::addEventToQueue(EventWrapper* wrapper){
-   
         queuedEvents.push(wrapper);
 }
 //Add sprite to engine
-void GameEngine::addSprite(reng::Sprite* sprite) {
+void GameEngine::addSprite(reng::Sprite* sprite){
     sprites.push_back(sprite);
+}
+std::vector<Sprite*> GameEngine::getSprites() const {
+    return sprites;
 }
 reng::PhysicsEngine* GameEngine::getPhysicsEngine(){
     return physicsEngine;
@@ -61,7 +63,7 @@ void GameEngine::removeSprite(reng::Sprite* sprite) {
    auto it = std::remove(sprites.begin(), sprites.end(), sprite);
     if (it != sprites.end()) {
         sprites.erase(it, sprites.end()); // Remove the sprite
-    }
+    }   
 }
  
 //Run game loop 
@@ -100,7 +102,6 @@ void GameEngine::handleEvents() {
                 addEventToQueue(static_cast<EventWrapper*>(keyboardEvent));
                 break;
              }
-        
         }
    
     
@@ -143,9 +144,9 @@ void GameEngine::render() {
     SDL_RenderClear(renderer);       
 
     for (auto* sprite : sprites) {
-        sprite->draw(renderer);
+        sprite ->draw(renderer);
     }
-
+    
     SDL_RenderPresent(renderer);   
 }
 

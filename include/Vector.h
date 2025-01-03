@@ -4,18 +4,20 @@ namespace reng
 {
    class Vector{
     public:
+    
      Vector(int x, int y);
      void rotate(float theta);
-     Vector operator+(const Vector& a) const;
-     Vector operator-(const Vector& y) const;
+     bool operator==(const Vector& otherVec) const;
+     Vector operator+(const Vector& otherVec) const;
+     Vector operator-(const Vector& otherVec) const;
      Vector operator*(float a);
      void setX(int newX);
      void setY(int newY);
-     int getX();
-     int getY();
+     int getX() const;
+     int getY() const;
      int getNormal();
-     Vector direction();
-     int size();
+     Vector direction() const;
+     int size() const;
      private:
      int x;
      int y;

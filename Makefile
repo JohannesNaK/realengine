@@ -31,7 +31,7 @@ INCLUDE_PATHS = -Iinclude -IC:/msys64/ucrt64/include
 
 # BIBLIOTEKSFILER–kompilerad objektkod
 # Mac INTEL LIBRARY_PATHS!
-#LIBRARY_PATHS = -Llib -L/usr/local/lib
+#LIBRARY_PATHS = -Llib -L/usr/local/lib§
 # Mac ARM LIBRARY_PATHS!
 #LIBRARY_PATHS = -Llib -L/opt/homebrew/lib
 # Windows LIBRARY_PATHS

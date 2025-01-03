@@ -9,7 +9,7 @@ namespace reng
     {
     public:
         RectSprite(int x, int y, int w, int h, SDL_Color color)
-            : Sprite(x, y, w, h), rectColor(color) {}
+            : Sprite(x, y, w, h, "rectsp"), rectColor(color) {}
 
        
         void draw(SDL_Renderer* renderer)  override;

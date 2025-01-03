@@ -1,9 +1,10 @@
 #ifndef SPRITE_H
 #define SPRITE_H
-
+#include "Vector.h"
+#include <string>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
-#include "Vector.h"
+ 
 class GameEngine;
 
 namespace reng
@@ -23,17 +24,19 @@ namespace reng
         void addToPosition(Vector otherPosition);
         void setPosition(Vector newPosition);
         void setVelocity(Vector newVelocity);
-        Vector getPosition();
-        Vector getVelocity();
-        bool isRemoved(){ return removed; }
+        Vector getPosition() const;
+        Vector getVelocity() const;
+     
         void setToRemove(){ removed = true; }
         void setTexture(SDL_Texture* tx);
         SDL_Rect& getRect() { return rect; }
 
     protected:
-        Sprite(int x, int y, int w, int h);
+        Sprite(int x, int y, int w, int h, std::string id);
         Vector position;
         Vector velocity;
+        std::string id;
+       
         SDL_Rect rect;
         SDL_Texture* texture;
         bool removed = false;

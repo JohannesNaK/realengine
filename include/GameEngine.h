@@ -22,6 +22,7 @@ namespace reng {
          SDL_Window* getWindow();
          void addKeyListener(std::function<void(KeyboardTrigger&)> keyTrigger);
          void addSprite(Sprite* sprite);
+         std::vector<Sprite*> getSprites() const;
          void removeSprite(Sprite* sprite);
          void run();
          void clean();

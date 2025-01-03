@@ -16,25 +16,24 @@ namespace reng {
             
         GameEngine::getInstance()->getPhysicsEngine()->addMoveListener([this](SpriteMoveTrigger& trigger){
             //Has the locked sprite moved? If so, change the relative positions.
-            if (&trigger.getSprite() == this->sprite && this->sprite != nullptr){
+        if (&trigger.getSprite() == this->sprite && this->sprite != nullptr){
            Vector position = trigger.getNewPosition();
            Vector orginOffset =  trigger.getNewVeloocity();
            //If player is at the top or bottom,prevent the sprite from moving.
            //Instead, move every other sprite in the opposite direction of the camera's velocity.
-           if (position.getY()- 100 <= 0 && trigger.getNewVeloocity().getY() < 0) {
-               
-                 trigger.setVelocity(Vector(trigger.getNewVeloocity().getX(), 0));
-           } else if (position.getY()+200 >=600 && trigger.getNewVeloocity().getY() > 0){
+           if (position.getY()- 150 <= 0 && trigger.getNewVeloocity().getY() < 0) {
+               trigger.setVelocity(Vector(trigger.getNewVeloocity().getX(), 0));
+           } else if (position.getY()+150 >=600 && trigger.getNewVeloocity().getY() > 0){
                        trigger.setVelocity(Vector(trigger.getNewVeloocity().getX(), 0));
            }
              //If player is at the right edge or left edge,prevent the sprite from moving.
            //Instead, move every other sprite in the opposite direction of the camera's velocity.
-            if (position.getX()- 100 <= 0 && trigger.getNewVeloocity().getX() < 0) {
+            if (position.getX()- 150 <= 0 && trigger.getNewVeloocity().getX() < 0) {
                   trigger.setVelocity(Vector(0, trigger.getNewVeloocity().getY()));
-           } else if (position.getY()+200 >=600 && trigger.getNewVeloocity().getY() > 0){
+           } else if (position.getY()+150 >=600 && trigger.getNewVeloocity().getY() > 0){
                   trigger.setVelocity(Vector(0, trigger.getNewVeloocity().getY()));
            }
-                this->setOrgin(orginOffset);
+            this->setOrgin(orginOffset);
                this->setUpdate(true);
              }
         }); 

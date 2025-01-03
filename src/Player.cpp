@@ -2,8 +2,9 @@
 #include "Vector.h"
 #include "GameEngine.h"
 #include "KeyboardTrigger.h"
+#include "Entity.h"
 namespace reng {
-    Player::Player(const std::string& name, int x, int y, int w, int h, int hp = 1) : Entity(name, x,y,w,h, hp){
+    Player::Player(const std::string name, int x, int y, int w, int h, int hp) : Entity(name, x,y,w,h, hp){
         GameEngine& engine = *GameEngine::getInstance();
            engine.addKeyListener([this](KeyboardTrigger& keyTrigger) {
             onW(keyTrigger);
