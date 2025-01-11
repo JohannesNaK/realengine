@@ -33,6 +33,7 @@ namespace reng {
         GameEngine();
         ~GameEngine();
         static GameEngine* instance;
+        static const std::unordered_map<SDL_Keycode, char> arrowToWASD;
         Camera* camera;
         std::unordered_map<char,KeyboardTrigger> keyTriggers;
        PhysicsEngine* physicsEngine;

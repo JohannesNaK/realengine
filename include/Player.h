@@ -10,13 +10,18 @@ namespace reng {
     class Player : public Entity {
         public:
         Player(const std::string  name, int x, int y, int w, int h, int hp);
-    
+        Player(const std::string  name, int x, int y, int w, int h, int hp, char up, char down, char left, char right);
         virtual void tick() override;
+        void setUpKey();
+        void setDownKey();
+        void setLeftKey();
+        void setRightKey();
         private:
-        void onW(KeyboardTrigger& keyTrigger);
-        void onA(KeyboardTrigger& keyTrigger);
-        void onS(KeyboardTrigger& keyTrigger);
-        void onD(KeyboardTrigger& keyTrigger);
+        char up,down,left,right;
+        void onUp(KeyboardTrigger& keyTrigger);
+        void onDown(KeyboardTrigger& keyTrigger);
+        void onLeft(KeyboardTrigger& keyTrigger);
+        void onRight(KeyboardTrigger& keyTrigger);
         static Event<KeyboardTrigger> keys;
         
     };

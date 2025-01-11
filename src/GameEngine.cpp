@@ -8,6 +8,12 @@
 #include <algorithm>
 #include <functional>
 namespace reng {
+const std::unordered_map<SDL_Keycode, char> GameEngine::arrowToWASD = {
+    {SDLK_UP, 'w'},   
+    {SDLK_LEFT, 'a'}, 
+    {SDLK_DOWN, 's'}, 
+    {SDLK_RIGHT, 'd'} 
+};
 GameEngine* GameEngine::instance = nullptr;
 GameEngine* GameEngine::getInstance(){
     if (instance == nullptr)
@@ -79,7 +85,7 @@ void GameEngine::run() {
 const char keyName(SDL_KeyboardEvent* key){
     return *SDL_GetKeyName(key->keysym.sym);
 }
- 
+  
 //Handle input
 void GameEngine::handleEvents() {
     SDL_Event event;
@@ -87,17 +93,30 @@ void GameEngine::handleEvents() {
     if (SDL_PollEvent(&event)) {        
       //Manage inputs, ask group if input should be on a seperate thread? 
         switch (event.type){
-            case SDL_QUIT: isRunning = false;
+             case SDL_QUIT: isRunning = false;
             break;
             case SDL_KEYUP: {
-                 KeyboardTrigger* keyTrigger = new KeyboardTrigger("Key released",KeyboardTrigger::KeyState::RELEASED, keyName(&event.key));
-                keyboardEvent->addTrigger(keyTrigger);
+                 KeyboardTrigger* keyTrigger;
+                if (arrowToWASD.count(event.key.keysym.sym)){
+                    char mappedKey = arrowToWASD.at(event.key.keysym.sym);
+                    keyTrigger = new KeyboardTrigger("Key released",KeyboardTrigger::KeyState::RELEASED, mappedKey);
+
+                }
+                   else
+                     keyTrigger = new KeyboardTrigger("Key released",KeyboardTrigger::KeyState::RELEASED, keyName(&event.key));
+                 
+                 keyboardEvent->addTrigger(keyTrigger);
                 addEventToQueue(static_cast<EventWrapper*>(keyboardEvent));
                 break;
             }
                 
              case SDL_KEYDOWN: {
-                 KeyboardTrigger* keyTrigger = new KeyboardTrigger("Key pressed",KeyboardTrigger::KeyState::PRESSED, keyName(&event.key));
+                KeyboardTrigger* keyTrigger;
+                 if (arrowToWASD.count(event.key.keysym.sym)){
+                    char mappedKey = arrowToWASD.at(event.key.keysym.sym);
+                    keyTrigger = new KeyboardTrigger("Key pressed",KeyboardTrigger::KeyState::PRESSED, mappedKey);
+                   } else
+                     keyTrigger = new KeyboardTrigger("Key pressed",KeyboardTrigger::KeyState::PRESSED, keyName(&event.key));
                 keyboardEvent->addTrigger(keyTrigger);
                 addEventToQueue(static_cast<EventWrapper*>(keyboardEvent));
                 break;
