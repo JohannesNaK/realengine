@@ -12,6 +12,7 @@ namespace reng {
         public:
         Player(const std::string  name, int x, int y, int w, int h, int hp);
         Player(const std::string  name, int x, int y, int w, int h, int hp, char up, char down, char left, char right);
+        Player(const std::string  name, int x, int y, int w, int h, int hp, char up, char down, char left, char right);
         virtual void tick() override;
         void setUpKey();
         void setDownKey();
