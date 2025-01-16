@@ -25,6 +25,54 @@ void PhysicsEngine::addCollisionListener(std::function<void(CollisionTrigger&)> 
 }
  void PhysicsEngine::move(Sprite& sprite,  Vector velocity){
     Vector oldPosition =  sprite.getPosition();
+    Vector newPosition = oldPosition + velocity;
+
+    if (enforcaBoundaries) {
+        //Get window size
+        int windowWidth = gameEngine->getWindowWidth();
+        int windowHeight = gameEngine->getWindowHeight();
+
+        //Adjust position X
+        if(newPosition.getX() < 0) {
+            newPosition.setX(0);
+            if(sprite.canBounce()) {
+                velocity.setX(-velocity.getX()); //Bounce back
+            } else {
+                velocity.setX(0);   //Can't bounce
+            }
+            
+        } else if (newPosition.getX() + sprite.getWidth() > windowWidth) {
+            newPosition.setX(windowWidth - sprite.getWidth());
+            if(sprite.canBounce()) {
+                velocity.setX(-velocity.getX()); //Bounce back
+            } else {       //Can't bounce
+                velocity.setX(0);
+            }
+        }
+
+        //Adjust position Y
+        if (newPosition.getY() < 0) {
+            newPosition.setY(0);
+            if(sprite.canBounce()) {
+                velocity.setY(-velocity.getY());  // Bounce back
+            } else {
+                velocity.setY(0);
+            }
+        } else if (newPosition.getY() + sprite.getHeight() > windowHeight) {
+            newPosition.setY(windowHeight - sprite.getHeight());
+            if(sprite.canBounce()) {
+                velocity.setY(-velocity.getY());  // Bounce back
+            } else {
+                velocity.setY(0);
+            }
+        }
+    }
+    
+    //Update sprite's position
+    sprite.setPosition(newPosition);
+    sprite.setVelocity(velocity);
+
+    //Trigger move event
     SpriteMoveTrigger* moveTrigger = new SpriteMoveTrigger("Sprite moved",sprite, oldPosition, velocity);
     moveEvent->addTrigger(moveTrigger);
     gameEngine->addEventToQueue(moveEvent);
@@ -73,4 +121,7 @@ bool PhysicsEngine::checkCollision(Vector sPos, Vector sBottom, Vector sourcePos
     return false;
 }
 
+    void PhysicsEngine::enableBoundaries(bool enable) {
+        enforcaBoundaries = enable;
+    }
 }

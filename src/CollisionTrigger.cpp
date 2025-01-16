@@ -9,7 +9,7 @@ namespace reng {
    }
    void CollisionTrigger::onPop(){
     if (knockBack){
-        std::cout << "called pop" << std::endl;
+ 
        
     }
     }

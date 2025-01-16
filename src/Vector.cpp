@@ -3,9 +3,10 @@
 #include <iostream>
 namespace reng
 {
-    Vector::Vector(int x, int y) : x(x), y(y){
-      
-    }
+    Vector::Vector(int x, int y) : x(x), y(y) {}
+
+    // Default constructor added here
+    Vector::Vector() : x(0), y(0) {}
     bool Vector::operator==(const Vector& otherVec) const{
         return x == otherVec.x && y == otherVec.y;
     }

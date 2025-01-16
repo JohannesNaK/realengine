@@ -6,6 +6,7 @@ namespace reng
     public:
     
      Vector(int x, int y);
+     Vector();
      void rotate(float theta);
      bool operator==(const Vector& otherVec) const;
      Vector operator+(const Vector& otherVec) const;

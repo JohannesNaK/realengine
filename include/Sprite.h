@@ -19,6 +19,7 @@ namespace reng
         virtual void mouseDown(const SDL_Event& eve) {}
         virtual void mouseUp(const SDL_Event& eve) {}
         virtual void draw(SDL_Renderer* renderer);
+        virtual bool canBounce() const { return false; } //Make default for Sprite to not be able to bounce
         void move();
         virtual void tick() {}
         void addToPosition(Vector otherPosition);
@@ -26,6 +27,8 @@ namespace reng
         void setVelocity(Vector newVelocity);
         Vector getPosition() const;
         Vector getVelocity() const;
+        int getWidth() const;
+        int getHeight() const;
      
         void setToRemove(){ removed = true; }
         void setTexture(SDL_Texture* tx);

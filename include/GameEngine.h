@@ -29,10 +29,16 @@ namespace reng {
          void addEventToQueue(EventWrapper* wraper);
          void setCameraFollowSprite(Sprite* sprite);
        PhysicsEngine* getPhysicsEngine();
+
+       int getWindowHeight() const;
+       int getWindowWidth() const;
+ 
+
     private:
         GameEngine();
         ~GameEngine();
         static GameEngine* instance;
+        static const std::unordered_map<SDL_Keycode, char> arrowToWASD;
         Camera* camera;
         std::unordered_map<char,KeyboardTrigger> keyTriggers;
        PhysicsEngine* physicsEngine;
@@ -46,6 +52,9 @@ namespace reng {
          void handlePhysics();
          void update();
          void render();
+
+         int windowWidth;
+         int windowHeight;
 };
 };
 #endif

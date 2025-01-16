@@ -38,4 +38,12 @@ namespace reng{
     void Sprite::setTexture(SDL_Texture* tx){
         texture = tx;
     }
+
+    int Sprite::getHeight() const{
+        return rect.h;
+    }
+
+    int Sprite::getWidth() const{
+        return rect.w;
+    }
 }
