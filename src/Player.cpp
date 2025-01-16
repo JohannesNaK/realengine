@@ -6,9 +6,9 @@
 
 namespace reng {
 
-    Player::Player(const std::string name, int x, int y, int w, int h, int hp) : Player(name,x,y,w,h,hp,'W','S','A','D') {    }
+    Player::Player( std::string name, int x, int y, int w, int h, int hp) : Player(name,x,y,w,h,hp,'W','S','A','D') {    }
     
-    Player::Player(const std::string name, int x, int y, int w, int h, int hp, char up, char down, char left, char right) :  Entity(name, x,y,w,h, hp),  up(up),down(down),left(left),right(right)
+    Player::Player( std::string name, int x, int y, int w, int h, int hp, char up, char down, char left, char right) :  Entity(name, x,y,w,h, hp),  up(up),down(down),left(left),right(right)
     {
        GameEngine& engine = *GameEngine::getInstance();
         engine.addKeyListener([this](KeyboardTrigger& keyTrigger) {
