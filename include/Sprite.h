@@ -31,7 +31,7 @@ namespace reng
      
         void setToRemove(){ removed = true; }
         bool isRemoved() const { return removed; }
-        void setTexture(SDL_Texture* tx);
+        void setTexture(std::string txName);
         SDL_Rect& getRect() { return rect; }
 
     protected:
@@ -48,6 +48,6 @@ namespace reng
         Sprite(const Sprite& other) = delete;
         const Sprite& operator=(const Sprite& other) = delete;
     };
-};
+}
 
 #endif

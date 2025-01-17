@@ -35,8 +35,8 @@ namespace reng{
         return velocity;
     }
     
-    void Sprite::setTexture(SDL_Texture* tx){
-        texture = tx;
+    void Sprite::setTexture(std::string txName){
+        texture = GameEngine::getInstance()->getTextureHandler()->getTexture(txName);
     }
 
     int Sprite::getHeight() const{

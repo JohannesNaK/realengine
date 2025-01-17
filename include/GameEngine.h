@@ -11,6 +11,8 @@
 #include <queue>
 #include <functional>
 #include <unordered_map>
+#include "TextureHandler.h"
+
 namespace reng {
     class Sprite;   
     class GameEngine {
@@ -18,20 +20,21 @@ namespace reng {
         static GameEngine* getInstance();
         void operator=(const GameEngine&) = delete;
         bool init();
-         SDL_Renderer* getRenderer(){ return renderer; }
-         SDL_Window* getWindow();
-         void addKeyListener(std::function<void(KeyboardTrigger&)> keyTrigger);
-         void addSprite(Sprite* sprite);
-         std::vector<Sprite*> getSprites() const;
-         void removeSprite(Sprite* sprite);
-         void run();
-         void clean();
-         void addEventToQueue(EventWrapper* wraper);
-         void setCameraFollowSprite(Sprite* sprite);
-       PhysicsEngine* getPhysicsEngine();
+        SDL_Renderer* getRenderer(){ return renderer; }
+        TextureHandler* getTextureHandler(){ return txHandler; }
+        SDL_Window* getWindow();
+        void addKeyListener(std::function<void(KeyboardTrigger&)> keyTrigger);
+        void addSprite(Sprite* sprite);
+        std::vector<Sprite*> getSprites() const;
+        void removeSprite(Sprite* sprite);
+        void run();
+        void clean();
+        void addEventToQueue(EventWrapper* wraper);
+        void setCameraFollowSprite(Sprite* sprite);
+        PhysicsEngine* getPhysicsEngine();
 
-       int getWindowHeight() const;
-       int getWindowWidth() const;
+        int getWindowHeight() const;
+        int getWindowWidth() const;
  
 
     private:
@@ -41,20 +44,21 @@ namespace reng {
         static const std::unordered_map<SDL_Keycode, char> arrowToWASD;
         Camera* camera;
         std::unordered_map<char,KeyboardTrigger> keyTriggers;
-       PhysicsEngine* physicsEngine;
-       Event<KeyboardTrigger>* keyboardEvent;
+        PhysicsEngine* physicsEngine;
+        Event<KeyboardTrigger>* keyboardEvent;
         std::vector<reng::Sprite*> sprites;
         SDL_Window* window;
         SDL_Renderer* renderer;
+        TextureHandler* txHandler;
         bool isRunning;
         std::queue<EventWrapper*> queuedEvents;
-         void handleEvents();
-         void handlePhysics();
-         void update();
-         void render();
+        void handleEvents();
+        void handlePhysics();
+        void update();
+        void render();
 
-         int windowWidth;
-         int windowHeight;
+        int windowWidth;
+        int windowHeight;
 };
 };
 #endif
