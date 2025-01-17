@@ -35,7 +35,7 @@ int main(int argc, char* argv[]){
   secondPlayer->enableKey('a', false);
   secondPlayer->enableKey('d', false);
 
-  reng::Ball* ball = reng::Ball::getInstance(400, 300, 20, 20);
+  reng::Ball* ball = reng::Ball::getInstance(400, 300, 20, 20, 2, 2);
   engine->getTextureHandler()->addTexture("ball", constants::gResPath + "images/whiteball.jpeg");
   ball->setTexture("ball");
   engine->addSprite(ball);

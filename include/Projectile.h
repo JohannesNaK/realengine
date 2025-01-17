@@ -11,6 +11,8 @@ namespace reng{
             static Projectile* getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed);
             virtual void tick();
             
+            virtual ~Projectile() = default;
+            
         protected:
             Projectile(int x, int y, int w, int h, int xSpeed, int ySpeed);          
     };

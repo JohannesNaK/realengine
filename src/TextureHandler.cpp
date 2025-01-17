@@ -29,8 +29,7 @@ namespace reng{
     }
 
     TextureHandler::~TextureHandler(){
-        for(auto t: textures){
-            delete t.second;
-        }
+        for(auto t: textures)
+            SDL_DestroyTexture(t.second);
     }
 }

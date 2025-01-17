@@ -11,7 +11,7 @@
 namespace reng {
     class Player : public Entity {
         public:
-        
+            virtual ~Player() = default;
             virtual void tick() override;
             void setUpKey();
             void setDownKey();

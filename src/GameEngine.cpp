@@ -42,6 +42,7 @@ bool GameEngine::init() {
     window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     camera = new Camera(renderer,nullptr);
+    txHandler = new TextureHandler();
     windowHeight = 600;
     windowWidth = 800;
     isRunning = true;
@@ -192,6 +193,7 @@ void GameEngine::clean() {
     delete camera;
     delete keyboardEvent;
     delete physicsEngine;
+    delete txHandler;
     SDL_Quit();
 }
 }

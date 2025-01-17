@@ -2,26 +2,21 @@
 #define BALL_H
 
 #include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h> 
-#include "Sprite.h"  
-#include "Vector.h"  
+#include <SDL2/SDL_image.h>
+#include "Projectile.h"
 
 namespace reng {
 
-    class Ball : public Sprite {
+    class Ball : public Projectile {
     public:
-        // Constructor for the Ball class
-        Ball(int x, int y, int w, int h, int xSpeed, int ySpeed);
-
-        static Ball* getInstance(int x, int y, int w, int h);  // Static method to create a Ball instance
-
-        virtual void tick() override;  //If the ball needs movement logic like velocity updates
-
+        static Ball* getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed);
         bool canBounce() const override {return true;}
-    private:
-        Vector velocity;
-    };
 
+        virtual ~Ball() = default;
+    
+    protected:
+        Ball(int x, int y, int w, int h, int xSpeed, int ySpeed);
+    };
 }
 
 #endif  // BALL_H
