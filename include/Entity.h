@@ -6,14 +6,15 @@
 
 namespace reng{
     class Entity: public Sprite{
-        public:
-            Entity(const std::string name, int x, int y, int w, int h, int hp);
+        public:            
             virtual ~Entity() = default;
-
             virtual void tick();
+            static Entity* getInstance(const std::string name, int x, int y, int w, int h, int hp);
+
         protected:
-          const std::string name;
-          int hp;
+            Entity(const std::string name, int x, int y, int w, int h, int hp);
+            const std::string name;
+            int hp;
            
     };
 }

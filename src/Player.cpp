@@ -92,4 +92,11 @@ namespace reng {
             keyEnabled[key] = enable;
         }
     }
+
+    Player* Player::getInstance(std::string  name, int x, int y, int w, int h, int hp){
+        return new Player(name, x, y, w, h, hp);
+    }
+    Player* Player::getInstance( std::string  name, int x, int y, int w, int h, int hp, char up, char down, char left, char right){
+        return new Player(name, x, y, w, h, hp, up, down, left, right);
+    }
 }

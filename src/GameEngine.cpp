@@ -64,7 +64,7 @@ void GameEngine::addKeyListener(std::function<void(KeyboardTrigger&)> listener){
     keyboardEvent->addListener(listener);
 }
 void GameEngine::addEventToQueue(EventWrapper* wrapper){
-        queuedEvents.push(wrapper);
+    queuedEvents.push(wrapper);
 }
 //Add sprite to engine
 void GameEngine::addSprite(reng::Sprite* sprite){
@@ -88,7 +88,6 @@ void GameEngine::removeSprite(reng::Sprite* sprite) {
 void GameEngine::run() {
     while (isRunning) {
         handleEvents();
-        handlePhysics();
         update();
         render();
         SDL_Delay(16); //~60 FPS
@@ -105,24 +104,22 @@ void GameEngine::handleEvents() {
     if (SDL_PollEvent(&event)) {        
       //Manage inputs, ask group if input should be on a seperate thread? 
         switch (event.type){
-             case SDL_QUIT: isRunning = false;
-            break;
+            case SDL_QUIT: isRunning = false; break;
             case SDL_KEYUP: {
-                 KeyboardTrigger* keyTrigger;
+                KeyboardTrigger* keyTrigger;
                 if (arrowToWASD.count(event.key.keysym.sym)){
                     char mappedKey = arrowToWASD.at(event.key.keysym.sym);
                     keyTrigger = new KeyboardTrigger("Key released",KeyboardTrigger::KeyState::RELEASED, mappedKey);
-
                 }
                    else
-                     keyTrigger = new KeyboardTrigger("Key released",KeyboardTrigger::KeyState::RELEASED, keyName(&event.key));
+                        keyTrigger = new KeyboardTrigger("Key released",KeyboardTrigger::KeyState::RELEASED, keyName(&event.key));
                  
-                 keyboardEvent->addTrigger(keyTrigger);
+                keyboardEvent->addTrigger(keyTrigger);
                 addEventToQueue(static_cast<EventWrapper*>(keyboardEvent));
                 break;
             }
                 
-             case SDL_KEYDOWN: {
+            case SDL_KEYDOWN: {
                 KeyboardTrigger* keyTrigger;
                  if (arrowToWASD.count(event.key.keysym.sym)){
                     char mappedKey = arrowToWASD.at(event.key.keysym.sym);
@@ -141,15 +138,10 @@ void GameEngine::handleEvents() {
     }
 }
 
-void GameEngine::handlePhysics(){
-           
-
-      
-}
-
 //Update game state
 void GameEngine::update() {
-     
+    std::vector<Sprite*> toRemove;
+
     //TODO: let the camera handle all render.
     //TODO: dont render sprites that are not within camera distance.
     for (auto* sprite : sprites) {
@@ -159,6 +151,14 @@ void GameEngine::update() {
             sprite->setPosition(pos);
         }
         sprite->tick();
+    }
+    for(auto iter = sprites.begin(); iter != sprites.end();){
+        if((*iter)->isRemoved()){
+            delete *iter;
+            iter = sprites.erase(iter);
+        }
+        else
+            iter++;
     }
     camera->setUpdate(false);
 }

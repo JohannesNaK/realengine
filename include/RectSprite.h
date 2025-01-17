@@ -7,15 +7,14 @@ namespace reng
 {
     class RectSprite : public Sprite
     {
-    public:
-        RectSprite(int x, int y, int w, int h, SDL_Color color)
-            : Sprite(x, y, w, h, "rectsp"), rectColor(color) {}
+        public:
+            void draw(SDL_Renderer* renderer)  override;
+            static RectSprite* getInstance(int x, int y, int w, int h, SDL_Color color);
 
-       
-        void draw(SDL_Renderer* renderer)  override;
-
-    private:
-        SDL_Color rectColor; 
+        private:
+            RectSprite(int x, int y, int w, int h, SDL_Color color)
+                : Sprite(x, y, w, h, "rectsp"), rectColor(color) {}
+            SDL_Color rectColor; 
     };
 }
 

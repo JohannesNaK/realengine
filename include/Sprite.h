@@ -1,5 +1,6 @@
 #ifndef SPRITE_H
 #define SPRITE_H
+
 #include "Vector.h"
 #include <string>
 #include <SDL2/SDL.h>
@@ -16,8 +17,6 @@ namespace reng
     public:
         virtual ~Sprite();
 
-        virtual void mouseDown(const SDL_Event& eve) {}
-        virtual void mouseUp(const SDL_Event& eve) {}
         virtual void draw(SDL_Renderer* renderer);
         virtual bool canBounce() const { return false; } //Make default for Sprite to not be able to bounce
         void move();
@@ -31,6 +30,7 @@ namespace reng
         int getHeight() const;
      
         void setToRemove(){ removed = true; }
+        bool isRemoved() const { return removed; }
         void setTexture(SDL_Texture* tx);
         SDL_Rect& getRect() { return rect; }
 
