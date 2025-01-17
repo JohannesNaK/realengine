@@ -9,13 +9,6 @@
 #include "Player.h"
 #include <string>
 #include "Ball.h"
-
-void pause(){
-     std::cout << "Press Enter to exit...";
-    
-    std::cin.get();
-}
- 
  
 int main(int argc, char* argv[]){
    
@@ -60,7 +53,6 @@ int main(int argc, char* argv[]){
   engine->getPhysicsEngine()->enableBoundaries(true); 
 
   engine->run();
-  pause();
 
   SDL_DestroyTexture(gubbTx);
   return 0;
