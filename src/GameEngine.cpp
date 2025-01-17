@@ -50,11 +50,11 @@ bool GameEngine::init() {
 }
 
 int GameEngine::getWindowWidth() const {
-    return windowWidth;  // Returns the window's width
+    return windowWidth;
 }
 
 int GameEngine::getWindowHeight() const {
-    return windowHeight;  // Returns the window's height
+    return windowHeight; 
 }
 
 void GameEngine::setCameraFollowSprite(Sprite* sprite){
@@ -80,7 +80,7 @@ reng::PhysicsEngine* GameEngine::getPhysicsEngine(){
 void GameEngine::removeSprite(reng::Sprite* sprite) {
    auto it = std::remove(sprites.begin(), sprites.end(), sprite);
     if (it != sprites.end()) {
-        sprites.erase(it, sprites.end()); // Remove the sprite
+        sprites.erase(it, sprites.end());
     }   
 }
  
@@ -132,16 +132,13 @@ void GameEngine::handleEvents() {
                 keyboardEvent->addTrigger(keyTrigger);
                 addEventToQueue(static_cast<EventWrapper*>(keyboardEvent));
                 break;
-             }
-        }
-   
-    
-    }
-          while (!queuedEvents.empty()){
-            queuedEvents.front()->notifyListeners();
-            queuedEvents.pop();
-            
             }
+        }    
+    }
+    while (!queuedEvents.empty()){
+        queuedEvents.front()->notifyListeners();
+        queuedEvents.pop();    
+    }
 }
 
 void GameEngine::handlePhysics(){
@@ -153,12 +150,12 @@ void GameEngine::handlePhysics(){
 //Update game state
 void GameEngine::update() {
      
-  //TODO: let the camera handle all render.
-  //TODO: dont render sprites that are not within camera distance.
+    //TODO: let the camera handle all render.
+    //TODO: dont render sprites that are not within camera distance.
     for (auto* sprite : sprites) {
         if (camera != nullptr && camera->update() && sprite != camera->getSprite()){
             //Offsetting every sprite to make the camera centralized.
-           Vector pos = sprite->getPosition()-camera->getOrgin();
+            Vector pos = sprite->getPosition()-camera->getOrgin();
             sprite->setPosition(pos);
         }
         sprite->tick();
