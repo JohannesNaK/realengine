@@ -11,6 +11,6 @@ namespace reng{
     }
 
     void Projectile::tick(){
-       //GameEngine::getInstance()->getPhysicsEngine()->move(this,velocity);
+       GameEngine::getInstance()->getPhysicsEngine()->move(*this,velocity);
     }
 }
