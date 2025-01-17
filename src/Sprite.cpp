@@ -6,7 +6,7 @@
 
 namespace reng{
     Sprite::Sprite(int x, int y, int w, int h, std::string id):  position(Vector(x,y)), velocity(Vector(0,0)), id(id),rect{x, y, w, h}
-    ,texture(nullptr) {
+    ,texture(nullptr), hitBox(w+5,h+5){
          
     }
     Sprite::~Sprite(){}
@@ -28,6 +28,9 @@ namespace reng{
      void Sprite::setVelocity(Vector newVelocity){
         velocity = newVelocity;
     }
+    Hitbox Sprite::getHitBox() const{
+        return hitBox;
+    }
     Vector Sprite::getPosition() const{
         return position;
     }
@@ -36,7 +39,9 @@ namespace reng{
     }
     
     void Sprite::setTexture(std::string txName){
+        
         texture = GameEngine::getInstance()->getTextureHandler()->getTexture(txName);
+    
     }
 
     int Sprite::getHeight() const{

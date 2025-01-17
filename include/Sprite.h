@@ -1,6 +1,6 @@
 #ifndef SPRITE_H
 #define SPRITE_H
-
+#include "Hitbox.h"
 #include "Vector.h"
 #include <string>
 #include <SDL2/SDL.h>
@@ -24,6 +24,7 @@ namespace reng
         void addToPosition(Vector otherPosition);
         void setPosition(Vector newPosition);
         void setVelocity(Vector newVelocity);
+        Hitbox getHitBox() const;
         Vector getPosition() const;
         Vector getVelocity() const;
         int getWidth() const;
@@ -37,11 +38,13 @@ namespace reng
     protected:
         Sprite(int x, int y, int w, int h, std::string id);
         Vector position;
+        
         Vector velocity;
         std::string id;
        
         SDL_Rect rect;
         SDL_Texture* texture;
+         Hitbox hitBox;
         bool removed = false;
 
     private:

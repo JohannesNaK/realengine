@@ -27,7 +27,8 @@ namespace reng
         return std::sqrt(x*x+y*y);
     }
     Vector Vector::direction() const{
-       return Vector(x/size(),y/size());
+        
+       return  size() != 0 ? Vector(x/size(),y/size()) : Vector(0,0);
     }
      int Vector::getNormal(){
         return 0;

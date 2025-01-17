@@ -1,11 +1,6 @@
 #include "PhysicsEngine.h"
 #include "GameEngine.h"
-#include "Vector.h"
-#include "Sprite.h"
-#include "SpriteMoveTrigger.h"
-#include "EventWrapper.h"
-#include <vector>
-#include <functional>
+ 
 
 namespace reng {
  
@@ -31,7 +26,7 @@ void PhysicsEngine::addCollisionListener(std::function<void(CollisionTrigger&)> 
         //Get window size
         int windowWidth = gameEngine->getWindowWidth();
         int windowHeight = gameEngine->getWindowHeight();
-
+            
         //Adjust position X
         if(newPosition.getX() < 0) {
             newPosition.setX(0);
@@ -82,14 +77,15 @@ void PhysicsEngine::collisionListener(Sprite& source) {
     for (Sprite* sprite : gameEngine->getSprites()){
         if (sprite != &source){
             Vector sPos = sprite->getPosition();
-            Vector sBottom = sPos + Vector(sprite->getRect().w, sprite->getRect().h);
+            Vector sBottom = sPos + Vector(sprite->getHitBox().getWidth(), -sprite->getHitBox().getHeight());
             Vector sourcePos = source.getPosition();
-            Vector sourceBottom = sourcePos + Vector(source.getRect().w, source.getRect().h);
+            Vector sourceBottom = sourcePos + Vector(source.getHitBox().getWidth(), -source.getHitBox().getHeight());
            if( checkCollision(sPos, sBottom, sourcePos, sourceBottom) || checkCollision(sourcePos, sourceBottom, sPos, sBottom)){
-           CollisionTrigger* collision = new CollisionTrigger("Collision trigger", source, *sprite);
+           CollisionTrigger* collision = new CollisionTrigger("Collision trigger", &source, sprite);
             collision->setKnockback(true);
             collisionEvent->addTrigger(collision);
             gameEngine->addEventToQueue(collisionEvent);
+      
             break;
            }
 
@@ -99,20 +95,20 @@ void PhysicsEngine::collisionListener(Sprite& source) {
 }
 bool PhysicsEngine::checkCollision(Vector sPos, Vector sBottom, Vector sourcePos, Vector sourceBottom) {
     if (sPos.getX() >= sourcePos.getX() && sPos.getX() <= sourceBottom.getX()){
-                if (sPos.getY() <= sourcePos.getY() && sPos.getY() >= sourcePos.getY()){
+                if (sPos.getY() <= sourcePos.getY() && sPos.getY() >= sourceBottom.getY()){
                      
                         //std::cout << "checked 1 " << std::endl;
                      return true;
-                } else if (sBottom.getY() <= sourcePos.getY() && sBottom.getY() >= sourcePos.getY()) {
+                } else if (sBottom.getY() <= sourcePos.getY() && sBottom.getY() >= sourceBottom.getY()) {
                    
                          //std::cout << "checked 1 " << std::endl;
                      return true;
                 }
     } else  if (sBottom.getX() >= sourcePos.getX() && sBottom.getX() <= sourceBottom.getX()){
-                 if (sPos.getY() <= sourcePos.getY() && sPos.getY() >= sourcePos.getY()){
+                 if (sPos.getY() <= sourcePos.getY() && sPos.getY() >= sourceBottom.getY()){
                     //std::cout << "checked 1 " << std::endl;
                     return true;
-                } else if (sBottom.getY() <= sourcePos.getY() && sBottom.getY() >= sourcePos.getY()) {
+                } else if (sBottom.getY() <= sourcePos.getY() && sBottom.getY() >= sourceBottom.getY()) {
                      //std::cout << "checked 1 " << std::endl;
                      return true;
                       

@@ -8,7 +8,7 @@
 #include "SpriteMoveTrigger.h"
 #include "CollisionTrigger.h"
 #include "EventWrapper.h"
- 
+#include <unordered_map>
 #include <functional>
  
 namespace  reng {
@@ -24,6 +24,7 @@ namespace  reng {
         void proccessQueuedEvents();
         void enableBoundaries(bool enable);
     private:
+    std::unordered_map<Sprite*, Sprite*> collisions;
     bool checkCollision(Vector sPos, Vector sBottom, Vector sourcePos, Vector sourceBottom);
     GameEngine* gameEngine;
     Event<SpriteMoveTrigger>* moveEvent;

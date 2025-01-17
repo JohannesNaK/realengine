@@ -30,8 +30,8 @@ int main(int argc, char* argv[]){
   engine->addSprite(player);
   engine->addSprite(secondPlayer);
 
-  player->enableKey('A', false);
-  player->enableKey('D', false);
+  player->enableKey('A', true);
+  player->enableKey('D', true);
   secondPlayer->enableKey('a', false);
   secondPlayer->enableKey('d', false);
 

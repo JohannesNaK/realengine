@@ -10,7 +10,7 @@ namespace reng {
     
     Player::Player( std::string name, int x, int y, int w, int h, int hp, char up, char down, char left, char right) :  Entity(name, x,y,w,h, hp),  up(up),down(down),left(left),right(right)
     {
-       GameEngine& engine = *GameEngine::getInstance();
+        GameEngine& engine = *GameEngine::getInstance();
         engine.addKeyListener([this](KeyboardTrigger& keyTrigger) {
         onUp(keyTrigger);
         onDown(keyTrigger);
@@ -38,6 +38,9 @@ namespace reng {
     void Player::onUp(KeyboardTrigger &keyTrigger)
     {
         if (keyTrigger.getKey() == up) {
+            std::cout << "corner is at " << rect.x   << ", " << rect.y << std::endl;
+           
+            std::cout << "hitbox bottom is " << rect.x+getHitBox().getWidth() << ", " << rect.y+getHitBox().getHeight() << std::endl;
             if (keyTrigger.getKeyState() == KeyboardTrigger::KeyState::PRESSED && keyEnabled[up]) {
                  velocity.setY(-5);
             }else {

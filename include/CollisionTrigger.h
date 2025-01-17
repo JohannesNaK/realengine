@@ -6,15 +6,15 @@
 namespace reng {
     class CollisionTrigger : public EventTrigger{
         public:
-        CollisionTrigger(std::string name, Sprite& collider, Sprite& into);
+        CollisionTrigger(std::string name, Sprite* collider, Sprite* into);
         void onPop() override;
         void setKnockback(bool knock);
         Sprite& getColliderSprite();
         Sprite& getIntoSprite();
         private:
         bool knockBack;
-        Sprite& collider;
-        Sprite& into;
+        Sprite* collider;
+        Sprite* into;
 
     };
 };
