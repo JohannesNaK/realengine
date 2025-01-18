@@ -31,13 +31,24 @@ namespace reng {
         else{
            // Vector cornerIndicator = collisionCorner - collider->getPosition();
             //Check what object has the largest hitbox and offset it
-            float r = colliderBox.size() > intoBox.size() ? colliderBox.size() : intoBox.size();
+            //float r = colliderBox.size() > intoBox.size() ? colliderBox.size() : intoBox.size();
             
+            Vector cornerDirection = (collisionCorner - collider->getPosition()).direction();
+            
+            if(cornerDirection.getX() > 0)
+                newSpeed.setX(newSpeed.getX() > 0 ? newSpeed.getX() * -1 : newSpeed.getX());
+            else
+                newSpeed.setX(newSpeed.getX() > 0 ? newSpeed.getX(): newSpeed.getX() * -1);
+
+            if(cornerDirection.getY() > 0)
+                newSpeed.setY(newSpeed.getY() > 0 ? newSpeed.getY() * -1: newSpeed.getY());
+            else
+                newSpeed.setX(newSpeed.getY() > 0 ? newSpeed.getY(): newSpeed.getY() * -1);
+
             
            // Vector offsret = newSpeed.direction()*(-1.2*r);
           //  collider->addToPosition(offset);
            // std::cout << "offset is " << offset.size() << " r is " << r << " speed is " << newSpeed.size() << std::endl;
-            newSpeed = newSpeed*-1;
  
         }
         collider->addToPosition(newSpeed.direction()*offset);
