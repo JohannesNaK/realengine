@@ -35,12 +35,12 @@ namespace reng {
             
             Vector cornerDirection = (collisionCorner - collider->getPosition()).direction();
             
-            if(cornerDirection.getX() > 0)
+            if(cornerDirection.getX()  < 0)
                 newSpeed.setX(newSpeed.getX() > 0 ? newSpeed.getX() * -1 : newSpeed.getX());
             else
                 newSpeed.setX(newSpeed.getX() > 0 ? newSpeed.getX(): newSpeed.getX() * -1);
 
-            if(cornerDirection.getY() > 0)
+            if(cornerDirection.getY()  < 0)
                 newSpeed.setY(newSpeed.getY() > 0 ? newSpeed.getY() * -1: newSpeed.getY());
             else
                 newSpeed.setX(newSpeed.getY() > 0 ? newSpeed.getY(): newSpeed.getY() * -1);
