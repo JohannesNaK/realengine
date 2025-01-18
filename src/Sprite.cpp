@@ -51,4 +51,10 @@ namespace reng{
     int Sprite::getWidth() const{
         return rect.w;
     }
+
+    bool Sprite::encapsulates(Vector point){
+        if(point.getX() > position.getX() && point.getX() < position.getX() + hitBox.getWidth() && point.getY() > position.getY() && point.getY() < position.getY() + hitBox.getHeight())
+            return true;
+        return false;
+    }
 }

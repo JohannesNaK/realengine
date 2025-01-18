@@ -22,6 +22,7 @@ namespace reng
         bool canBounceFromBoundary() const { return bounceBoundary; }
         void setBounceFromObjects(bool b){ bounceObjects = b; }
         void setBounceFromBoundary(bool b){ bounceBoundary = b; }
+        bool encapsulates(Vector point);
         void move();
         virtual void tick() {}
         void addToPosition(Vector otherPosition);

@@ -30,7 +30,7 @@ void PhysicsEngine::addCollisionListener(std::function<void(CollisionTrigger&)> 
         //Adjust position X
         if(newPosition.getX() < 0) {
             newPosition.setX(0);
-            if(sprite.canBounce()) {
+            if(sprite.canBounceFromBoundary()) {
                 velocity.setX(-velocity.getX()); //Bounce back
             } else {
                 velocity.setX(0);   //Can't bounce
@@ -38,7 +38,7 @@ void PhysicsEngine::addCollisionListener(std::function<void(CollisionTrigger&)> 
             
         } else if (newPosition.getX() + sprite.getWidth() > windowWidth) {
             newPosition.setX(windowWidth - sprite.getWidth());
-            if(sprite.canBounce()) {
+            if(sprite.canBounceFromBoundary()) {
                 velocity.setX(-velocity.getX()); //Bounce back
             } else {       //Can't bounce
                 velocity.setX(0);
@@ -48,14 +48,14 @@ void PhysicsEngine::addCollisionListener(std::function<void(CollisionTrigger&)> 
         //Adjust position Y
         if (newPosition.getY() < 0) {
             newPosition.setY(0);
-            if(sprite.canBounce()) {
+            if(sprite.canBounceFromBoundary()) {
                 velocity.setY(-velocity.getY());  // Bounce back
             } else {
                 velocity.setY(0);
             }
         } else if (newPosition.getY() + sprite.getHeight() > windowHeight) {
             newPosition.setY(windowHeight - sprite.getHeight());
-            if(sprite.canBounce()) {
+            if(sprite.canBounceFromBoundary()) {
                 velocity.setY(-velocity.getY());  // Bounce back
             } else {
                 velocity.setY(0);
@@ -82,7 +82,6 @@ void PhysicsEngine::collisionListener(Sprite& source) {
             Vector sourceBottom = sourcePos + Vector(source.getHitBox().getWidth(), -source.getHitBox().getHeight());
            if( checkCollision(sPos, sBottom, sourcePos, sourceBottom) || checkCollision(sourcePos, sourceBottom, sPos, sBottom)){
            CollisionTrigger* collision = new CollisionTrigger("Collision trigger", &source, sprite);
-            collision->setKnockback(true);
             collisionEvent->addTrigger(collision);
             gameEngine->addEventToQueue(collisionEvent);
       

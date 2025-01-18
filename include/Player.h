@@ -20,7 +20,6 @@ namespace reng {
 
             //Method to enable certain keys
             void enableKey(char key, bool enable);
-            bool canBounce() const override {return false;}
 
             int getHeight() const;
             int getWidth() const;

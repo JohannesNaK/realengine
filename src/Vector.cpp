@@ -19,6 +19,11 @@ namespace reng
     Vector Vector::operator*(float a) {
        return Vector(x*a,y*a);
     }
+    const Vector& Vector::operator*=(float a) {
+       x *= a;
+       y *= a;
+       return *this;
+    }
     void Vector::rotate(float theta){
         x = std::cos(theta);
         y = std::sin(theta);
