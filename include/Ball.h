@@ -10,8 +10,7 @@ namespace reng {
     class Ball : public Projectile {
     public:
         static Ball* getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed);
-        bool canBounce() const override {return true;}
-
+        //Listener 
         virtual ~Ball() = default;
     
     protected:
@@ -19,4 +18,4 @@ namespace reng {
     };
 }
 
-#endif  // BALL_H
+#endif

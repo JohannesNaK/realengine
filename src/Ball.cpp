@@ -8,7 +8,10 @@
 namespace reng {
 
     Ball::Ball(int x, int y, int w, int h, int xSpeed, int ySpeed)
-        : Projectile(x, y, w, h, xSpeed, ySpeed) {}
+        : Projectile(x, y, w, h, xSpeed, ySpeed) {
+            setBounceFromBoundary(true);
+            setBounceFromObjects(true);
+        }
 
     Ball* Ball::getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed) {
         return new Ball(x, y, w, h, xSpeed, ySpeed);

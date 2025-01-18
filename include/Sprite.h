@@ -18,7 +18,10 @@ namespace reng
         virtual ~Sprite();
 
         virtual void draw(SDL_Renderer* renderer);
-        virtual bool canBounce() const { return false; } //Make default for Sprite to not be able to bounce
+        bool canBounceFromObjects() const { return bounceObjects; }
+        bool canBounceFromBoundary() const { return bounceBoundary; }
+        void setBounceFromObjects(bool b){ bounceObjects = b; }
+        void setBounceFromBoundary(bool b){ bounceBoundary = b; }
         void move();
         virtual void tick() {}
         void addToPosition(Vector otherPosition);
@@ -44,12 +47,16 @@ namespace reng
        
         SDL_Rect rect;
         SDL_Texture* texture;
-         Hitbox hitBox;
+        Hitbox hitBox;
         bool removed = false;
 
+        
     private:
         Sprite(const Sprite& other) = delete;
         const Sprite& operator=(const Sprite& other) = delete;
+
+        bool bounceObjects;
+        bool bounceBoundary;
     };
 }
 
