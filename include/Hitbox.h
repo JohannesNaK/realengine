@@ -9,6 +9,7 @@ namespace reng
         Hitbox(int width, int height);
         int getWidth() const;
         int getHeight() const;
+        float size() const;
     private:
         int width,  height;
 

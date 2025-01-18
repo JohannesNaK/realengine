@@ -3,7 +3,7 @@
 #include <iostream>
 namespace reng
 {
-    Vector::Vector(int x, int y) : x(x), y(y) {}
+    Vector::Vector(float  x, float y) : x(x), y(y) {}
 
     // Default constructor added here
     Vector::Vector() : x(0), y(0) {}
@@ -28,12 +28,12 @@ namespace reng
         x = std::cos(theta);
         y = std::sin(theta);
     }
-    int Vector::size() const{
+    float Vector::size() const{
         return std::sqrt(x*x+y*y);
     }
     Vector Vector::direction() const{
-        
-       return  size() != 0 ? Vector(x/size(),y/size()) : Vector(0,0);
+ 
+       return  size() != 0.0 ? Vector(x/size(),y/size()) : Vector(0,0);
     }
      int Vector::getNormal(){
         return 0;

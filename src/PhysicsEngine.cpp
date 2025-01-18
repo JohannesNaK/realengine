@@ -99,7 +99,6 @@ bool PhysicsEngine::checkCollision(Vector sPos, Vector sBottom, Vector sourcePos
                         //std::cout << "checked 1 " << std::endl;
                      return true;
                 } else if (sBottom.getY() <= sourcePos.getY() && sBottom.getY() >= sourceBottom.getY()) {
-                   
                          //std::cout << "checked 1 " << std::endl;
                      return true;
                 }
@@ -109,8 +108,7 @@ bool PhysicsEngine::checkCollision(Vector sPos, Vector sBottom, Vector sourcePos
                     return true;
                 } else if (sBottom.getY() <= sourcePos.getY() && sBottom.getY() >= sourceBottom.getY()) {
                      //std::cout << "checked 1 " << std::endl;
-                     return true;
-                      
+                     return true;     
                 }
     }
     return false;

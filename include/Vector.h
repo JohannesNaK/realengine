@@ -5,7 +5,7 @@ namespace reng
    class Vector{
     public:
     
-     Vector(int x, int y);
+     Vector(float x, float y);
      Vector();
      void rotate(float theta);
      bool operator==(const Vector& otherVec) const;
@@ -19,10 +19,9 @@ namespace reng
      int getY() const;
      int getNormal();
      Vector direction() const;
-     int size() const;
+     float size() const;
      private:
-     int x;
-     int y;
+      float x,y;
    }; 
 };
 
