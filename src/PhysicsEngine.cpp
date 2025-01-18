@@ -1,7 +1,7 @@
 #include "PhysicsEngine.h"
 #include "GameEngine.h"
- 
-
+#include "Projectile.h"
+#include "Entity.h"
 namespace reng {
  
 PhysicsEngine::PhysicsEngine(GameEngine* gameEngine) : gameEngine(gameEngine){
@@ -9,6 +9,15 @@ PhysicsEngine::PhysicsEngine(GameEngine* gameEngine) : gameEngine(gameEngine){
     collisionEvent = new Event<CollisionTrigger>("Collision event");  
    moveEvent->addListener([this](SpriteMoveTrigger& trigger) {
             collisionListener(trigger.getSprite());
+    });
+    collisionEvent->addListener([this](CollisionTrigger& trigger) {
+        Projectile* proj = dynamic_cast<Projectile*>(trigger.getColliderSprite());
+        if (proj!= nullptr) {
+            Entity* entity = dynamic_cast<Entity*>(trigger.getIntoSprite());
+            if (entity != nullptr) {
+                std::cout << "ball hit oga boga" << std::endl;
+            }
+        }
     });
  
 }

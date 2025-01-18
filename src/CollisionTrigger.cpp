@@ -56,5 +56,11 @@ namespace reng {
     }
     //addToPosition här?
     }
+   Sprite* CollisionTrigger::getColliderSprite(){
+    return collider;
+   }
+   Sprite* CollisionTrigger::getIntoSprite(){
+    return into;
+   }
 
 }

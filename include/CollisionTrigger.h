@@ -8,8 +8,8 @@ namespace reng {
         public:
         CollisionTrigger(std::string name, Sprite* collider, Sprite* into);
         void onPop() override;
-        Sprite& getColliderSprite();
-        Sprite& getIntoSprite();
+        Sprite* getColliderSprite();
+        Sprite*  getIntoSprite();
         private:
         Sprite* collider;
         Sprite* into;
