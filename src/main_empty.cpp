@@ -18,11 +18,6 @@ int main(int argc, char* argv[]){
   reng::GameEngine* engine = reng::GameEngine::getInstance();
   engine->init();
 
-  engine->getResourceHandler()->addFont("HPfont", 30, constants::gResPath + "fonts/arial.ttf");
-  Label* playerHP = Label::getInstance(100, 100, 100, 100, "HP: 100", "HPfont");
-  playerHP->setColor(255U, 0U, 0U);
-  engine->addSprite(playerHP);
-
   engine->getResourceHandler()->addTexture("paddle", constants::gResPath + "images/paddle.png");
   
   Player* player = Player::getInstance("Test player",10,110,50,50,24);
@@ -35,6 +30,15 @@ int main(int argc, char* argv[]){
 
   engine->addSprite(player);
   engine->addSprite(secondPlayer);
+
+  engine->getResourceHandler()->addFont("HPfont", 20, constants::gResPath + "fonts/arial.ttf");
+
+  Label* playerHP = Label::getInstance(20, 0, 100, 100, "HP: 100", "HPfont");
+  Label* secondPlayerHP = Label::getInstance(680, 0, 100, 100, "HP: 100", "HPfont");
+  secondPlayerHP->setColor(255U, 0U, 0U);
+
+  engine->addSprite(playerHP);
+  engine->addSprite(secondPlayerHP);
 
   player->enableKey('A', true);
   player->enableKey('D', true);
