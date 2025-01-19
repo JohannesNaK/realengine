@@ -9,7 +9,7 @@
 #include "Player.h"
 #include <string>
 #include "Ball.h"
-
+#include "Entity.h"
 using namespace reng;
 
 int main(int argc, char* argv[]){
@@ -19,11 +19,11 @@ int main(int argc, char* argv[]){
 
   engine->getResourceHandler()->addTexture("paddle", constants::gResPath + "images/paddle.png");
     
-  Player* player = Player::getInstance("Test player",10,110,50,50,1);
+  Player* player = Player::getInstance("Test player",10,110,50,50,12);
   player->setTexture("paddle");
   player->setPosition(reng::Vector(0,300));
 
-  Player* secondPlayer = Player::getInstance("Second test player",10,110,50,50,1,'w','s','a','d');
+  Player* secondPlayer = Player::getInstance("Second test player",10,110,50,50,12 ,'w','s','a','d');
   secondPlayer->setTexture("paddle");
   secondPlayer->setPosition(reng::Vector(750,300));
 
@@ -39,9 +39,17 @@ int main(int argc, char* argv[]){
   engine->getResourceHandler()->addTexture("ball", constants::gResPath + "images/whiteball.jpeg");
   ball->setTexture("ball");
   engine->addSprite(ball);
-  
   engine->getPhysicsEngine()->enableBoundaries(true); 
-
+      engine->getPhysicsEngine() -> addCollisionListener([](CollisionTrigger& trigger) {
+        Projectile* proj = dynamic_cast<Projectile*>(trigger.getColliderSprite());
+        if (proj!= nullptr) {
+            Entity* entity = dynamic_cast<Entity*>(trigger.getIntoSprite());
+            if (entity != nullptr) {
+                entity->damage(4);
+                std::cout << "ball hit oga boga" << std::endl;
+            }
+        }
+    });
   engine->run();
 
   return 0;

@@ -48,7 +48,6 @@ bool GameEngine::init() {
     windowHeight = 600;
     windowWidth = 800;
     isRunning = true;
-
     return true;
 }
 
