@@ -27,6 +27,7 @@ namespace reng {
         void addKeyListener(std::function<void(KeyboardTrigger&)> keyTrigger);
         void addSprite(Sprite* sprite);
         std::vector<Sprite*> getSprites() const;
+        Event<KeyboardTrigger>* getKeyboardEventHandler();
         void removeSprite(Sprite* sprite);
         void run();
         void clean();

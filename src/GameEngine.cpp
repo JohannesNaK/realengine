@@ -86,6 +86,9 @@ void GameEngine::removeSprite(reng::Sprite* sprite) {
         sprites.erase(it, sprites.end());
     }   
 }
+Event<KeyboardTrigger>* GameEngine::getKeyboardEventHandler(){
+    return keyboardEvent;
+}
  
 //Run game loop 
 void GameEngine::run() {
