@@ -10,6 +10,7 @@
 #include <string>
 #include "Ball.h"
 #include "Entity.h"
+#include "Label.h"
 using namespace reng;
 
 int main(int argc, char* argv[]){
@@ -17,8 +18,13 @@ int main(int argc, char* argv[]){
   reng::GameEngine* engine = reng::GameEngine::getInstance();
   engine->init();
 
+  engine->getResourceHandler()->addFont("HPfont", 30, constants::gResPath + "fonts/arial.ttf");
+  Label* playerHP = Label::getInstance(0, 0, 50, 50, "HP: 100", "HPFont");
+  playerHP->setColor(255, 0, 0);
+  engine->addSprite(playerHP);
+
   engine->getResourceHandler()->addTexture("paddle", constants::gResPath + "images/paddle.png");
-    
+  
   Player* player = Player::getInstance("Test player",10,110,50,50,24);
   player->setTexture("paddle");
   player->setPosition(reng::Vector(0,300));
@@ -49,7 +55,7 @@ int main(int argc, char* argv[]){
             Entity* entity = dynamic_cast<Entity*>(trigger.getIntoSprite());
             if (entity != nullptr) {
               if (proj->getSource() != entity) {
-                 entity->damage(4);
+                entity->damage(4);
              
               } else {
                 //bonk

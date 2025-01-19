@@ -12,6 +12,7 @@ namespace reng
         static Label* getInstance(int x, int y, int w, int h, std::string txt, std::string font);
         std::string getText() const;
         void setText(std::string newText);
+        void setColor(Uint8 r, Uint8 g, Uint8 b);
         virtual ~Label();
 
         void setTexture(std::string txName) = delete;
@@ -22,6 +23,9 @@ namespace reng
     private:
         std::string text;
         TTF_Font* font;
+        SDL_Color color;
+
+        void updateTexture();
     };
 };
 

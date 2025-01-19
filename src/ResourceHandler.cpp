@@ -30,6 +30,8 @@ namespace reng{
     
     void ResourceHandler::addFont(std::string name, int size, std::string url){
         TTF_Font* font = TTF_OpenFont(url.c_str(), size);
+        if (!font)
+            SDL_Log("Failed to load font: %s", SDL_GetError());
         if(fonts.count(name))
             throw std::invalid_argument("Can't have two textures with same name!");
 
