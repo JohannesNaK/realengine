@@ -11,7 +11,7 @@ namespace reng{
             SDL_Log("Failed to load texture: %s", SDL_GetError());
         
         if(textures.count(name))
-            throw std::invalid_argument("Can't have two textures with same name!");
+            throw std::invalid_argument("Can't have two textures with same name!" + name + " doesn't!");
 
         textures[name] = tx;
     }
@@ -26,7 +26,7 @@ namespace reng{
 
     SDL_Texture* ResourceHandler::getTexture(std::string name){
         if(!textures.count(name))
-            throw std::invalid_argument("Texture doesn't exist!");
+            throw std::invalid_argument("Texture doesn't exist! " + name + " doesn't!");
         
         return textures[name];
     }
@@ -36,7 +36,7 @@ namespace reng{
         if (!font)
             SDL_Log("Failed to load font: %s", SDL_GetError());
         if(fonts.count(name))
-            throw std::invalid_argument("Can't have two textures with same name!");
+            throw std::invalid_argument("Can't have two fonts with same name! " + name + " duplicate!" );
 
         fonts[name] = font;
     }
@@ -49,7 +49,7 @@ namespace reng{
 
     TTF_Font* ResourceHandler::getFont(std::string name){
         if(!fonts.count(name))
-            throw std::invalid_argument("Font doesn't exist!");
+            throw std::invalid_argument("Font doesn't exist!" + name + " doesn't!");
         return fonts[name];
     }
 

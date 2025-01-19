@@ -11,7 +11,9 @@ namespace reng{
         hp -= damage;
         
     }
-   
+    const std::string& Entity::getName(){
+                return name;
+    }
     Entity* Entity::getInstance(const std::string name, int x, int y, int w, int h, int hp){
         return new Entity(name, x, y, w, h, hp);
     }

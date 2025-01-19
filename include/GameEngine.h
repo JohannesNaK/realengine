@@ -20,7 +20,7 @@ namespace reng {
     public:
         static GameEngine* getInstance();
         void operator=(const GameEngine&) = delete;
-        bool init();
+        bool init(int windowWidth, int windowHeight);
         SDL_Renderer* getRenderer(){ return renderer; }
         ResourceHandler* getResourceHandler(){ return resHandler; }
         SDL_Window* getWindow();
@@ -30,11 +30,12 @@ namespace reng {
         void removeSprite(Sprite* sprite);
         void run();
         void clean();
+        void clearAllSprites();
         void addEventToQueue(EventWrapper* wraper);
         void setCameraFollowSprite(Sprite* sprite);
         void render();
         PhysicsEngine* getPhysicsEngine();
-
+    
         int getWindowHeight() const;
         int getWindowWidth() const;
  

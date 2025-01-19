@@ -38,15 +38,16 @@ GameEngine::~GameEngine() {
 }
 
 //Initialize game engine
-bool GameEngine::init() {
+bool GameEngine::init(int ww, int wh) {
     SDL_Init(SDL_INIT_EVERYTHING);
     TTF_Init();
-    window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
+    windowWidth = ww;
+    windowHeight = wh;
+    window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, ww, wh, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     camera = new Camera(renderer,nullptr);
     resHandler = new ResourceHandler();
-    windowHeight = 600;
-    windowWidth = 800;
+ 
     isRunning = true;
     return true;
 }
@@ -180,6 +181,9 @@ void GameEngine::render() {
     SDL_RenderPresent(renderer);   
 }
 
+void GameEngine::clearAllSprites(){
+    sprites.clear();
+}
 //Clean up resources
 void GameEngine::clean() {
     if (renderer) {

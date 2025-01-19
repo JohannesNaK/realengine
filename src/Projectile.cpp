@@ -9,7 +9,7 @@ namespace reng{
     Projectile* Projectile::getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed,Sprite* spriteSource){
         return new Projectile(x, y, w, h, xSpeed, ySpeed, spriteSource);
     }
-    const Sprite* Projectile::getSource() const{
+      Sprite* Projectile::getSource() const{
         return source;
     }
     void Projectile::tick(){

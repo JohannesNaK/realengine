@@ -10,6 +10,7 @@ namespace reng{
             virtual ~Entity() = default;
             virtual void tick();
             virtual void damage(int damage);
+            const std::string& getName();
             static Entity* getInstance(const std::string name, int x, int y, int w, int h, int hp);
         protected:
             Entity(const std::string name, int x, int y, int w, int h, int hp);

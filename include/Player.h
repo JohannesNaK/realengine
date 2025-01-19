@@ -22,9 +22,7 @@ namespace reng {
 
             //Method to enable certain keys
             void enableKey(char key, bool enable);
-            std::string& getName(){
-                return name;
-            }
+            
             void setTextLabel(std::string text);
             Label* getLabel(){
                 return label;
@@ -41,7 +39,7 @@ namespace reng {
 
         private:
      
-            std::string name;
+  
             int h;
             int w;
 

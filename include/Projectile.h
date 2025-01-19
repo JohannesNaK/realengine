@@ -12,7 +12,7 @@ namespace reng{
             virtual void tick();
             
             virtual ~Projectile() = default;
-            const Sprite* getSource() const;
+              Sprite* getSource() const;
         protected:
             Sprite* source;
             Projectile(int x, int y, int w, int h, int xSpeed, int ySpeed, Sprite* source);          
