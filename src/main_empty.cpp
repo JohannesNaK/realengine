@@ -18,14 +18,15 @@ int main(int argc, char* argv[]){
   reng::GameEngine* engine = reng::GameEngine::getInstance();
   engine->init();
 
-  engine->getResourceHandler()->addTexture("paddle", constants::gResPath + "images/paddle.png");
+  engine->getResourceHandler()->addTexture("white_paddle", constants::gResPath + "images/white_paddle.png");
+  engine->getResourceHandler()->addTexture("red_paddle", constants::gResPath + "images/red_paddle.png");
   
-  Player* player = Player::getInstance("Test player",10,110,50,50,24);
-  player->setTexture("paddle");
+  Player* player = Player::getInstance("Test player",10,110,35,55,24);
+  player->setTexture("white_paddle");
   player->setPosition(reng::Vector(0,300));
 
-  Player* secondPlayer = Player::getInstance("Second test player",10,110,50,50,24 ,'w','s','a','d');
-  secondPlayer->setTexture("paddle");
+  Player* secondPlayer = Player::getInstance("Second test player",10,110,35,55,24 ,'w','s','a','d');
+  secondPlayer->setTexture("red_paddle");
   secondPlayer->setPosition(reng::Vector(750,300));
 
   engine->addSprite(player);
@@ -46,8 +47,8 @@ int main(int argc, char* argv[]){
   secondPlayer->enableKey('d', false);
 
   reng::Ball* ball = reng::Ball::getInstance(300, 300, 20, 20, 4, 3, player);
-  engine->getResourceHandler()->addTexture("white_ball", constants::gResPath + "images/whiteball.jpeg");
-  engine->getResourceHandler()->addTexture("red_ball", constants::gResPath + "images/redball.jpeg");
+  engine->getResourceHandler()->addTexture("white_ball", constants::gResPath + "images/whiteball.png");
+  engine->getResourceHandler()->addTexture("red_ball", constants::gResPath + "images/redball.png");
   ball->setTexture("white_ball");
   engine->addSprite(ball);
   reng::Ball* hellBullet = reng::Ball::getInstance(400, 300, 20, 20, -4, 3, secondPlayer);      
