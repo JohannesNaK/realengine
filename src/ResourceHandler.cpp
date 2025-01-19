@@ -25,6 +25,9 @@ namespace reng{
     }
 
     SDL_Texture* ResourceHandler::getTexture(std::string name){
+        if(!textures.count(name))
+            throw std::invalid_argument("Texture doesn't exist!");
+        
         return textures[name];
     }
     
@@ -45,6 +48,8 @@ namespace reng{
     }
 
     TTF_Font* ResourceHandler::getFont(std::string name){
+        if(!fonts.count(name))
+            throw std::invalid_argument("Font doesn't exist!");
         return fonts[name];
     }
 

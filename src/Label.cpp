@@ -13,7 +13,6 @@ namespace reng
         font = GameEngine::getInstance()->getResourceHandler()->getFont(f);
         updateTexture();
     }
-
     std::string Label::getText() const { return text; }
     void Label::setText(std::string newText){
         text = newText;
