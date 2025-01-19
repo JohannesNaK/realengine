@@ -10,16 +10,9 @@ PhysicsEngine::PhysicsEngine(GameEngine* gameEngine) : gameEngine(gameEngine){
    moveEvent->addListener([this](SpriteMoveTrigger& trigger) {
             collisionListener(trigger.getSprite());
     });
-    collisionEvent->addListener([this](CollisionTrigger& trigger) {
-        Projectile* proj = dynamic_cast<Projectile*>(trigger.getColliderSprite());
-        if (proj!= nullptr) {
-            Entity* entity = dynamic_cast<Entity*>(trigger.getIntoSprite());
-            if (entity != nullptr) {
-                std::cout << "ball hit oga boga" << std::endl;
-            }
-        }
-    });
- 
+}
+Event<CollisionTrigger>* PhysicsEngine::getCollisionEventHandler() {
+  return collisionEvent;
 }
 void PhysicsEngine::addMoveListener(std::function<void(SpriteMoveTrigger&)> listener){
     moveEvent->addListener(listener);

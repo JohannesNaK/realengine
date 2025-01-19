@@ -23,24 +23,18 @@ namespace reng {
         keyEnabled[left] = true;
         keyEnabled[right] = true;
     }
-    
+  
     void Player::tick() {
-
         auto* engine = GameEngine::getInstance();
         engine->getPhysicsEngine()->move(*this, velocity);
-        
         if (hp <= 0) {
             setToRemove();
         }
     }
-
-    
     void Player::onUp(KeyboardTrigger &keyTrigger)
     {
         if (keyTrigger.getKey() == up) {
-            std::cout << "corner is at " << rect.x   << ", " << rect.y << std::endl;
-           
-            std::cout << "hitbox bottom is " << rect.x+getHitBox().getWidth() << ", " << rect.y+getHitBox().getHeight() << std::endl;
+            
             if (keyTrigger.getKeyState() == KeyboardTrigger::KeyState::PRESSED && keyEnabled[up]) {
                  velocity.setY(-5);
             }else {

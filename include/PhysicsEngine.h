@@ -23,6 +23,7 @@ namespace  reng {
         void addCollisionListener(std::function<void(CollisionTrigger&)> listener);
         void proccessQueuedEvents();
         void enableBoundaries(bool enable);
+        Event<CollisionTrigger>* getCollisionEventHandler();
     private:
     std::unordered_map<Sprite*, Sprite*> collisions;
     bool checkCollision(Vector sPos, Vector sBottom, Vector sourcePos, Vector sourceBottom);

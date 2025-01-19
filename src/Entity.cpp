@@ -7,7 +7,9 @@ namespace reng{
         if(hp <= 0)
             setToRemove();
     }
-
+    void Entity::damage(int damage) {
+        hp -= damage;
+    }
     Entity* Entity::getInstance(const std::string name, int x, int y, int w, int h, int hp){
         return new Entity(name, x, y, w, h, hp);
     }
