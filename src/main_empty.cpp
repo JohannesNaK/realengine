@@ -36,12 +36,13 @@ int main(int argc, char* argv[]){
   secondPlayer->enableKey('d', false);
 
   reng::Ball* ball = reng::Ball::getInstance(300, 300, 20, 20, 4, 3, player);
-  engine->getResourceHandler()->addTexture("ball", constants::gResPath + "images/whiteball.jpeg");
-  ball->setTexture("ball");
+  engine->getResourceHandler()->addTexture("white_ball", constants::gResPath + "images/whiteball.jpeg");
+    engine->getResourceHandler()->addTexture("red_ball", constants::gResPath + "images/redball.jpeg");
+  ball->setTexture("white_ball");
   engine->addSprite(ball);
   reng::Ball* hellBullet = reng::Ball::getInstance(400, 300, 20, 20, -4, 3, secondPlayer);      
   reng::GameEngine::getInstance()->addSprite(hellBullet);     
-  hellBullet->setTexture("ball"); 
+  hellBullet->setTexture("red_ball"); 
   engine->getPhysicsEngine()->enableBoundaries(true); 
   engine->getPhysicsEngine() -> addCollisionListener([](CollisionTrigger& trigger) {
         Projectile* proj = dynamic_cast<Projectile*>(trigger.getColliderSprite());
@@ -50,7 +51,7 @@ int main(int argc, char* argv[]){
             if (entity != nullptr) {
               if (proj->getSource() != entity) {
                  entity->damage(4);
-             
+                 
               } else {
                 //bonk
               }
