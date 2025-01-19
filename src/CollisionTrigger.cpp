@@ -17,14 +17,12 @@ namespace reng {
         int offset = Vector(intoBox.getWidth() - colliderBox.getWidth(), intoBox.getHeight() - colliderBox.getWidth()).size() + 1;
         //Colliding corners have the same X, with different Y
         if(into->encapsulates(possibleCornerSameX)){
-            std::cout << "collision first  if " << std::endl;
-            newSpeed.setY(newSpeed.getY()*-1);
+             newSpeed.setY(newSpeed.getY()*-1);
         }
         //Colliding corners have the same Y, with different X
         else if(into->encapsulates(possibleCornerSameY)){
             newSpeed.setX(newSpeed.getX()*-1);
-            std::cout << "collision second if " << std::endl;
-        }
+         }
         //Objects collided corner to corner
         else{
             Vector cornerDirection = (collisionCorner - collider->getPosition()).direction();

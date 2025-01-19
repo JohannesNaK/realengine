@@ -4,7 +4,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include "Sprite.h"
-
+#include <SDL2/SDL_ttf.h>
 namespace reng
 {
     class Label: public Sprite{

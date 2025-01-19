@@ -32,6 +32,7 @@ namespace reng {
         void clean();
         void addEventToQueue(EventWrapper* wraper);
         void setCameraFollowSprite(Sprite* sprite);
+        void render();
         PhysicsEngine* getPhysicsEngine();
 
         int getWindowHeight() const;
@@ -56,7 +57,7 @@ namespace reng {
         void handleEvents();
         void handlePhysics();
         void update();
-        void render();
+    
 
         int windowWidth;
         int windowHeight;

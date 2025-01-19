@@ -6,9 +6,11 @@
 
 namespace reng {
 
-    Player::Player( std::string name, int x, int y, int w, int h, int hp) : Player(name,x,y,w,h,hp,'W','S','A','D') {    }
+    Player::Player( std::string name, int x, int y, int w, int h, int hp, Label* label) : Player(name,x,y,w,h,hp,'W','S','A','D', label) {    }
     
-    Player::Player( std::string name, int x, int y, int w, int h, int hp, char up, char down, char left, char right) :  Entity(name, x,y,w,h, hp),  up(up),down(down),left(left),right(right)
+    Player::Player( std::string name, int x, int y, int w, int h, int hp, char up, char down, char left, char right, Label* label) :  Entity(name, x,y,w,h, hp),  up(up),down(down),left(left),right(right),
+       label(label)
+
     {
         GameEngine& engine = *GameEngine::getInstance();
         engine.addKeyListener([this](KeyboardTrigger& keyTrigger) {
@@ -30,6 +32,12 @@ namespace reng {
         if (hp <= 0) {
             setToRemove();
         }
+    }
+    int Player::getHP()  const{
+        return hp;
+    }
+    void Player::setHP(int newHP){
+        hp = newHP;
     }
     void Player::onUp(KeyboardTrigger &keyTrigger)
     {
@@ -89,11 +97,16 @@ namespace reng {
             keyEnabled[key] = enable;
         }
     }
-
-    Player* Player::getInstance(std::string  name, int x, int y, int w, int h, int hp){
-        return new Player(name, x, y, w, h, hp);
+    void Player::setTextLabel(std::string text){
+        if (label != nullptr ) {
+            label->setText(text);
+        }
     }
-    Player* Player::getInstance( std::string  name, int x, int y, int w, int h, int hp, char up, char down, char left, char right){
-        return new Player(name, x, y, w, h, hp, up, down, left, right);
+
+    Player* Player::getInstance(std::string  name, int x, int y, int w, int h, int hp, Label* label){
+        return new Player(name, x, y, w, h, hp, label);
+    }
+    Player* Player::getInstance( std::string  name, int x, int y, int w, int h, int hp, char up, char down, char left, char right, Label* label){
+        return new Player(name, x, y, w, h, hp, up, down, left, right, label);
     }
 }
