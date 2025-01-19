@@ -9,6 +9,7 @@ namespace reng
     Label* Label::getInstance(int x, int y, int w, int h, std::string txt, std::string font){ return new Label(x, y, w, h, txt, font); }
 
     Label::Label(int x, int y, int w, int h, std::string txt, std::string f): Sprite(x, y, w, h), text(txt), color({0U, 0U, 0U}) {
+        setCollidable(false);
         font = GameEngine::getInstance()->getResourceHandler()->getFont(f);
         updateTexture();
     }

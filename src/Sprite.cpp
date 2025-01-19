@@ -6,7 +6,7 @@
 
 namespace reng{
     Sprite::Sprite(int x, int y, int w, int h):  position(Vector(x,y)), velocity(Vector(0,0)), rect{x, y, w, h}
-    ,texture(nullptr), hitBox(w+10,h+10), bounceObjects(false), bounceBoundary(false){
+    ,texture(nullptr), hitBox(w+10,h+10), bounceObjects(false), bounceBoundary(false), collidable(true){
          
     }
     Sprite::~Sprite(){}

@@ -19,8 +19,8 @@ int main(int argc, char* argv[]){
   engine->init();
 
   engine->getResourceHandler()->addFont("HPfont", 30, constants::gResPath + "fonts/arial.ttf");
-  Label* playerHP = Label::getInstance(0, 0, 50, 50, "HP: 100", "HPFont");
-  playerHP->setColor(255, 0, 0);
+  Label* playerHP = Label::getInstance(100, 100, 100, 100, "HP: 100", "HPfont");
+  playerHP->setColor(255U, 0U, 0U);
   engine->addSprite(playerHP);
 
   engine->getResourceHandler()->addTexture("paddle", constants::gResPath + "images/paddle.png");
@@ -43,7 +43,7 @@ int main(int argc, char* argv[]){
 
   reng::Ball* ball = reng::Ball::getInstance(300, 300, 20, 20, 4, 3, player);
   engine->getResourceHandler()->addTexture("white_ball", constants::gResPath + "images/whiteball.jpeg");
-    engine->getResourceHandler()->addTexture("red_ball", constants::gResPath + "images/redball.jpeg");
+  engine->getResourceHandler()->addTexture("red_ball", constants::gResPath + "images/redball.jpeg");
   ball->setTexture("white_ball");
   engine->addSprite(ball);
   reng::Ball* hellBullet = reng::Ball::getInstance(400, 300, 20, 20, -4, 3, secondPlayer);      

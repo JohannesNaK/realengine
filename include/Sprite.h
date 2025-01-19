@@ -20,8 +20,10 @@ namespace reng
         virtual void draw(SDL_Renderer* renderer);
         bool canBounceFromObjects() const { return bounceObjects; }
         bool canBounceFromBoundary() const { return bounceBoundary; }
+        bool isCollidable() const { return collidable; }
         void setBounceFromObjects(bool b){ bounceObjects = b; }
         void setBounceFromBoundary(bool b){ bounceBoundary = b; }
+        void setCollidable(bool b){ collidable = b; }
         bool encapsulates(Vector point);
         void move();
         virtual void tick() {}
@@ -55,6 +57,7 @@ namespace reng
 
         bool bounceObjects;
         bool bounceBoundary;
+        bool collidable;
     };
 }
 
