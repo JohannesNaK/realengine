@@ -37,16 +37,11 @@ namespace reng
         void setToRemove(){ removed = true; }
         bool isRemoved() const { return removed; }
         void setTexture(std::string txName);
-        SDL_Rect& getRect() { return rect; }
 
     protected:
-        Sprite(int x, int y, int w, int h, std::string id);
+        Sprite(int x, int y, int w, int h);
         Vector position;
-        
         Vector velocity;
-        std::string id;
-       
-        SDL_Rect rect;
         SDL_Texture* texture;
         Hitbox hitBox;
         bool removed = false;

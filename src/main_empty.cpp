@@ -17,7 +17,7 @@ int main(int argc, char* argv[]){
   reng::GameEngine* engine = reng::GameEngine::getInstance();
   engine->init();
 
-  engine->getTextureHandler()->addTexture("paddle", constants::gResPath + "images/paddle.png");
+  engine->getResourceHandler()->addTexture("paddle", constants::gResPath + "images/paddle.png");
     
   Player* player = Player::getInstance("Test player",10,110,50,50,1);
   player->setTexture("paddle");
@@ -36,7 +36,7 @@ int main(int argc, char* argv[]){
   secondPlayer->enableKey('d', false);
 
   reng::Ball* ball = reng::Ball::getInstance(400, 300, 20, 20, 4, 3);
-  engine->getTextureHandler()->addTexture("ball", constants::gResPath + "images/whiteball.jpeg");
+  engine->getResourceHandler()->addTexture("ball", constants::gResPath + "images/whiteball.jpeg");
   ball->setTexture("ball");
   engine->addSprite(ball);
   

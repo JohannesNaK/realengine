@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_ttf.h>
 #include "PhysicsEngine.h"
 #include "Sprite.h"
 #include "KeyboardTrigger.h"
@@ -11,7 +12,7 @@
 #include <queue>
 #include <functional>
 #include <unordered_map>
-#include "TextureHandler.h"
+#include "ResourceHandler.h"
 
 namespace reng {
     class Sprite;   
@@ -21,7 +22,7 @@ namespace reng {
         void operator=(const GameEngine&) = delete;
         bool init();
         SDL_Renderer* getRenderer(){ return renderer; }
-        TextureHandler* getTextureHandler(){ return txHandler; }
+        ResourceHandler* getResourceHandler(){ return resHandler; }
         SDL_Window* getWindow();
         void addKeyListener(std::function<void(KeyboardTrigger&)> keyTrigger);
         void addSprite(Sprite* sprite);
@@ -49,7 +50,7 @@ namespace reng {
         std::vector<reng::Sprite*> sprites;
         SDL_Window* window;
         SDL_Renderer* renderer;
-        TextureHandler* txHandler;
+        ResourceHandler* resHandler;
         bool isRunning;
         std::queue<EventWrapper*> queuedEvents;
         void handleEvents();
@@ -61,4 +62,5 @@ namespace reng {
         int windowHeight;
 };
 };
+
 #endif

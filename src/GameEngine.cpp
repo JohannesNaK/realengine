@@ -7,6 +7,7 @@
  
 #include <algorithm>
 #include <functional>
+
 namespace reng {
 const std::unordered_map<SDL_Keycode, char> GameEngine::arrowToWASD = {
     {SDLK_UP, 'w'},   
@@ -39,10 +40,11 @@ GameEngine::~GameEngine() {
 //Initialize game engine
 bool GameEngine::init() {
     SDL_Init(SDL_INIT_EVERYTHING);
+    TTF_Init();
     window = SDL_CreateWindow("Game Engine", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600, SDL_WINDOW_SHOWN);
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     camera = new Camera(renderer,nullptr);
-    txHandler = new TextureHandler();
+    txHandler = new ResourceHandler();
     windowHeight = 600;
     windowWidth = 800;
     isRunning = true;
