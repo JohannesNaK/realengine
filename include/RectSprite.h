@@ -13,7 +13,7 @@ namespace reng
 
         private:
             RectSprite(int x, int y, int w, int h, SDL_Color color)
-                : Sprite(x, y, w, h, "rectsp"), rectColor(color) {}
+                : Sprite(x, y, w, h), rectColor(color) {}
             SDL_Color rectColor; 
     };
 }

@@ -3,7 +3,7 @@
 #include "GameEngine.h"
 namespace reng{
     
-    Projectile::Projectile(int x, int y, int w, int h, int xSpeed, int ySpeed): Sprite(x, y, w, h, "proj"){
+    Projectile::Projectile(int x, int y, int w, int h, int xSpeed, int ySpeed): Sprite(x, y, w, h){
         velocity = Vector(xSpeed, ySpeed);
     }
     Projectile* Projectile::getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed){

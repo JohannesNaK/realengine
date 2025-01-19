@@ -27,13 +27,7 @@ namespace reng{
     SDL_Texture* ResourceHandler::getTexture(std::string name){
         return textures[name];
     }
-
-    ResourceHandler::~ResourceHandler(){
-        for(auto t: textures)
-            SDL_DestroyTexture(t.second);
-    }
-
-
+    
     void ResourceHandler::addFont(std::string name, int size, std::string url){
         TTF_Font* font = TTF_OpenFont(url.c_str(), size);
         if(fonts.count(name))

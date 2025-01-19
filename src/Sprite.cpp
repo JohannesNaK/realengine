@@ -5,7 +5,7 @@
 #include "GameEngine.h"
 
 namespace reng{
-    Sprite::Sprite(int x, int y, int w, int h, std::string id):  position(Vector(x,y)), velocity(Vector(0,0)), id(id),rect{x, y, w, h}
+    Sprite::Sprite(int x, int y, int w, int h):  position(Vector(x,y)), velocity(Vector(0,0)), rect{x, y, w, h}
     ,texture(nullptr), hitBox(w+10,h+10), bounceObjects(false), bounceBoundary(false){
          
     }
@@ -39,9 +39,7 @@ namespace reng{
     }
     
     void Sprite::setTexture(std::string txName){
-        
-        texture = GameEngine::getInstance()->getTextureHandler()->getTexture(txName);
-    
+        texture = GameEngine::getInstance()->getResourceHandler()->getTexture(txName);
     }
 
     int Sprite::getHeight() const{

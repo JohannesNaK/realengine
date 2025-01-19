@@ -12,7 +12,9 @@ namespace reng
         static Label* getInstance(int x, int y, int w, int h, std::string txt, std::string font);
         std::string getText() const;
         void setText(std::string newText);
-        virtual ~Label() = default;
+        virtual ~Label();
+
+        void setTexture(std::string txName) = delete;
         
     protected:
         Label(int x, int y, int w, int h, std::string txt, std::string font);
