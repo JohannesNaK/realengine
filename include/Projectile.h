@@ -8,13 +8,14 @@
 namespace reng{
     class Projectile: public Sprite{
         public:
-            static Projectile* getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed);
+            static Projectile* getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed, Sprite* source);
             virtual void tick();
             
             virtual ~Projectile() = default;
-            
+            const Sprite* getSource() const;
         protected:
-            Projectile(int x, int y, int w, int h, int xSpeed, int ySpeed);          
+            Sprite* source;
+            Projectile(int x, int y, int w, int h, int xSpeed, int ySpeed, Sprite* source);          
     };
 }
 

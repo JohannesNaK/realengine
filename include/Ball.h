@@ -4,17 +4,17 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include "Projectile.h"
-
 namespace reng {
 
     class Ball : public Projectile {
     public:
-        static Ball* getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed);
+        static Ball* getInstance(int x, int y, int w, int h, int xSpeed, int ySpeed, Sprite* source);
         //Listener 
         virtual ~Ball() = default;
     
     protected:
-        Ball(int x, int y, int w, int h, int xSpeed, int ySpeed);
+        Ball(int x, int y, int w, int h, int xSpeed, int ySpeed, Sprite* source);
+ 
     };
 }
 
